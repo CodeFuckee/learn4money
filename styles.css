@@ -43,6 +43,10 @@ body {
   font-size: 26px;
   font-weight: 700;
   letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
 }
 
 .subtitle {
@@ -50,6 +54,17 @@ body {
   color: var(--text-dim);
   font-size: 13px;
 }
+
+/* ---------- Lucide 图标 ---------- */
+/* createIcons 会把 <i data-lucide class="ic ..."> 替换为 <svg class="lucide ... ic ...">，样式经 class 保留 */
+.ic {
+  flex-shrink: 0;
+}
+.ic-title { width: 24px; height: 24px; color: var(--green); }
+.ic-card  { width: 15px; height: 15px; color: var(--text-dim); }
+.ic-btn   { width: 16px; height: 16px; }
+.ic-sm    { width: 14px; height: 14px; color: var(--text-dim); }
+.ic-xs    { width: 12px; height: 12px; }
 
 .card {
   background: var(--card);
@@ -64,6 +79,9 @@ body {
   font-weight: 600;
   color: var(--text-dim);
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
 
 /* ---------- 工资设置 ---------- */
@@ -218,6 +236,10 @@ body {
   padding: 12px 22px;
   cursor: pointer;
   transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
 
 .btn:disabled {
@@ -301,6 +323,9 @@ body {
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .btn-link:hover {
@@ -348,10 +373,13 @@ body {
 
 .empty-hint {
   margin-top: 12px;
-  text-align: center;
   font-size: 13px;
   color: var(--text-dim);
   padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
 
 .page-footer {

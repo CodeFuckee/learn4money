@@ -18,7 +18,7 @@
 
 **在线访问**（GitHub Pages）：https://codefuckee.github.io/learn4money/
 
-本地运行，纯静态页面，无依赖、无构建：
+本地运行，纯静态页面，无构建：
 
 ```bash
 python3 -m http.server 8765 --bind 0.0.0.0
@@ -29,5 +29,6 @@ python3 -m http.server 8765 --bind 0.0.0.0
 
 ## 技术说明
 
-- 原生 HTML/CSS/JS 单页应用，无第三方依赖。
+- 原生 HTML/CSS/JS 单页应用。
+- 图标统一使用 [Lucide](https://lucide.dev)（ISC 许可），库文件内置在 `vendor/lucide.min.js`，无任何运行时 CDN/网络请求，离线可用；库加载失败时页面功能不受影响（仅无图标）。
 - 金额 = 已学秒数 × (时薪 ÷ 3600)，每帧从 `Date.now() - startTs - 暂停累计` 重算，不使用累加器，避免计时漂移。

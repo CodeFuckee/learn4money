@@ -143,20 +143,19 @@ function render() {
 
   if (!session) {
     $("statusText").textContent = "待开始";
-    $("startBtn").textContent = "开始学习";
+    $("startBtnText").textContent = "开始学习";
     $("startBtn").disabled = false;
     $("pauseBtn").disabled = true;
-    $("pauseBtn").textContent = "暂停";
     $("stopBtn").disabled = true;
   } else if (session.paused) {
     $("statusText").textContent = "已暂停";
-    $("startBtn").textContent = "继续";
+    $("startBtnText").textContent = "继续";
     $("startBtn").disabled = false;
     $("pauseBtn").disabled = true;
     $("stopBtn").disabled = false;
   } else {
     $("statusText").textContent = "挣钱中…";
-    $("startBtn").textContent = "继续";
+    $("startBtnText").textContent = "继续";
     $("startBtn").disabled = true;
     $("pauseBtn").disabled = false;
     $("stopBtn").disabled = false;
@@ -348,3 +347,6 @@ document
 
 render();
 tick();
+
+// 渲染 Lucide 图标（vendor 加载失败时页面仍完整可用，只是无图标）
+if (window.lucide) lucide.createIcons();

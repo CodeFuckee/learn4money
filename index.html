@@ -9,13 +9,13 @@
 <body>
   <div class="page">
     <header class="page-header">
-      <h1>📚 学习挣钱</h1>
+      <h1><i data-lucide="book-open" class="ic ic-title"></i>学习挣钱</h1>
       <p class="subtitle">学一分钟，挣一分钟的钱</p>
     </header>
 
     <!-- 工资设置 -->
     <section class="card settings-card">
-      <div class="card-title">⚙️ 工资设置</div>
+      <div class="card-title"><i data-lucide="wallet" class="ic ic-card"></i>工资设置</div>
       <div class="settings-row">
         <div class="mode-switch" id="modeSwitch" role="radiogroup">
           <button class="mode-btn active" data-mode="monthly" id="modeMonthly">月薪</button>
@@ -37,9 +37,15 @@
       <div class="elapsed-time" id="elapsedTime">00:00:00</div>
       <div class="status-dot" id="statusDot"><span class="dot"></span><span id="statusText">待开始</span></div>
       <div class="controls">
-        <button class="btn btn-primary" id="startBtn">开始学习</button>
-        <button class="btn btn-secondary" id="pauseBtn" disabled>暂停</button>
-        <button class="btn btn-danger" id="stopBtn" disabled>结束</button>
+        <button class="btn btn-primary" id="startBtn">
+          <i data-lucide="play" class="ic ic-btn"></i><span id="startBtnText">开始学习</span>
+        </button>
+        <button class="btn btn-secondary" id="pauseBtn" disabled>
+          <i data-lucide="pause" class="ic ic-btn"></i>暂停
+        </button>
+        <button class="btn btn-danger" id="stopBtn" disabled>
+          <i data-lucide="square" class="ic ic-btn"></i>结束
+        </button>
       </div>
     </section>
 
@@ -62,16 +68,21 @@
     <!-- 历史记录 -->
     <section class="card history-card">
       <div class="history-header">
-        <div class="card-title">📋 学习记录</div>
-        <button class="btn-link" id="clearBtn">清空</button>
+        <div class="card-title"><i data-lucide="clipboard-list" class="ic ic-card"></i>学习记录</div>
+        <button class="btn-link" id="clearBtn">
+          <i data-lucide="trash-2" class="ic ic-xs"></i>清空
+        </button>
       </div>
       <ul class="record-list" id="recordList"></ul>
-      <div class="empty-hint" id="emptyHint">还没有记录，点击「开始学习」赚第一笔吧 🚀</div>
+      <div class="empty-hint" id="emptyHint">
+        <i data-lucide="rocket" class="ic ic-sm"></i>还没有记录，点击「开始学习」赚第一笔吧
+      </div>
     </section>
 
     <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
   </div>
 
+  <script src="vendor/lucide.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
