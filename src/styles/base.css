@@ -14,21 +14,21 @@
 
 :root {
   /* 兜底 tokens（= classic-dark；正常情况下 themes.css 按 body[data-theme] 生效） */
-  --bg: #0a0a0a;
-  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1c1c1e 0%, var(--bg) 55%);
-  --card: rgba(255, 255, 255, 0.06);
-  --card-border: rgba(255, 255, 255, 0.12);
-  --text: #f4f4f4;
-  --text-dim: #8d8d8d;
-  --accent: #ffffff;
-  --accent-contrast: #0a0a0a;
-  --accent-glow: rgba(255, 255, 255, 0.3);
-  --running-border: rgba(255, 255, 255, 0.5);
-  --danger: #8d8d8d;
-  --danger-bg: rgba(141, 141, 141, 0.12);
-  --amber: #a8a8a8;
-  --chip-bg: rgba(255, 255, 255, 0.07);
-  --item-bg: rgba(255, 255, 255, 0.05);
+  --bg: #0f1220;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a2340 0%, var(--bg) 55%);
+  --card: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #e8eaf2;
+  --text-dim: #8a90a6;
+  --accent: #60a5fa;
+  --accent-contrast: #0b1c3d;
+  --accent-glow: rgba(96, 165, 250, 0.35);
+  --running-border: rgba(96, 165, 250, 0.4);
+  --danger: #f87171;
+  --danger-bg: rgba(248, 113, 113, 0.15);
+  --amber: #fbbf24;
+  --chip-bg: rgba(255, 255, 255, 0.06);
+  --item-bg: rgba(255, 255, 255, 0.04);
   --radius-card: 16px;
   --radius-stat: 14px;
   --radius-sm: 8px;
