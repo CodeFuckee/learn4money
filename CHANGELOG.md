@@ -2,6 +2,12 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.5.2] - 2026-11-04
+
+### Changed
+
+- 经典主题配色改为黑白灰：深色（纯黑底 + 白 accent + 白光晕）/ 浅色（g10 灰白底 + 黑 accent）；Carbon 组件 token（primary/tertiary/danger/interactive/focus 等）同步灰阶化，语义色（danger/警示）去彩色。
+
 ## [0.5.1] - 2026-11-04
 
 ### Changed

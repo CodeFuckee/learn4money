@@ -10,22 +10,22 @@
 
 /* ==================== 经典 ==================== */
 body[data-theme="classic-dark"] {
-  --bg: #0f1220;
-  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a2340 0%, var(--bg) 55%);
-  --card: rgba(255, 255, 255, 0.05);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --text: #e8eaf2;
-  --text-dim: #8a90a6;
-  --accent: #4589ff;
-  --accent-contrast: #ffffff;
-  --accent-glow: rgba(69, 137, 255, 0.35);
-  --running-border: rgba(69, 137, 255, 0.4);
-  --danger: #f87171;
-  --danger-bg: rgba(248, 113, 113, 0.15);
-  --danger-bg-hover: rgba(248, 113, 113, 0.25);
-  --amber: #fbbf24;
-  --chip-bg: rgba(255, 255, 255, 0.06);
-  --item-bg: rgba(255, 255, 255, 0.04);
+  --bg: #0a0a0a;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1c1c1e 0%, var(--bg) 55%);
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text: #f4f4f4;
+  --text-dim: #8d8d8d;
+  --accent: #ffffff;
+  --accent-contrast: #0a0a0a;
+  --accent-glow: rgba(255, 255, 255, 0.3);
+  --running-border: rgba(255, 255, 255, 0.5);
+  --danger: #8d8d8d;
+  --danger-bg: rgba(141, 141, 141, 0.12);
+  --danger-bg-hover: rgba(141, 141, 141, 0.22);
+  --amber: #a8a8a8;
+  --chip-bg: rgba(255, 255, 255, 0.07);
+  --item-bg: rgba(255, 255, 255, 0.05);
   --btn2-bg: rgba(255, 255, 255, 0.1);
   --btn2-bg-hover: rgba(255, 255, 255, 0.16);
   --radius-card: 16px;
@@ -36,24 +36,24 @@ body[data-theme="classic-dark"] {
 }
 
 body[data-theme="classic-light"] {
-  --bg: #f2f4fa;
-  --bg-image: radial-gradient(1200px 800px at 70% -10%, #e3eaff 0%, var(--bg) 55%);
-  --card: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(15, 23, 42, 0.08);
-  --text: #1e2438;
-  --text-dim: #6b7288;
-  --accent: #0f62fe;
+  --bg: #f4f4f4;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #fafafa 0%, var(--bg) 55%);
+  --card: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --text: #161616;
+  --text-dim: #6f6f6f;
+  --accent: #161616;
   --accent-contrast: #ffffff;
-  --accent-glow: rgba(15, 98, 254, 0.22);
-  --running-border: rgba(15, 98, 254, 0.45);
-  --danger: #dc2626;
-  --danger-bg: rgba(220, 38, 38, 0.1);
-  --danger-bg-hover: rgba(220, 38, 38, 0.18);
-  --amber: #d97706;
-  --chip-bg: rgba(15, 23, 42, 0.05);
-  --item-bg: rgba(15, 23, 42, 0.04);
-  --btn2-bg: rgba(15, 23, 42, 0.08);
-  --btn2-bg-hover: rgba(15, 23, 42, 0.14);
+  --accent-glow: transparent;
+  --running-border: rgba(0, 0, 0, 0.5);
+  --danger: #6f6f6f;
+  --danger-bg: rgba(111, 111, 111, 0.1);
+  --danger-bg-hover: rgba(111, 111, 111, 0.2);
+  --amber: #8d8d8d;
+  --chip-bg: rgba(0, 0, 0, 0.05);
+  --item-bg: rgba(0, 0, 0, 0.04);
+  --btn2-bg: rgba(0, 0, 0, 0.08);
+  --btn2-bg-hover: rgba(0, 0, 0, 0.14);
 }
 
 /* 经典：毛玻璃卡片 + 圆角 */
@@ -77,7 +77,7 @@ body[data-theme="classic-light"] .v-field {
   border-radius: var(--radius-input);
 }
 
-/* 经典：Carbon design tokens（官方 g100/g10 色板值，供 @carbon/vue 组件使用）+ IBM Plex 字体 */
+/* 经典：Carbon design tokens（黑白化：g100/g10 结构 + 灰阶语义色，供 @carbon/vue 组件使用）+ IBM Plex 字体 */
 body[data-theme="classic-dark"] {
   --cds-background: #161616;
   --cds-layer: #262626;
@@ -85,22 +85,23 @@ body[data-theme="classic-dark"] {
   --cds-field: #262626;
   --cds-text-primary: #f4f4f4;
   --cds-text-secondary: #c6c6c6;
-  --cds-text-on-color: #ffffff;
-  --cds-interactive: #4589ff;
-  --cds-link-primary: #4589ff;
+  --cds-text-on-color: #0a0a0a;
+  --cds-interactive: #f4f4f4;
+  --cds-link-primary: #f4f4f4;
   --cds-border-subtle: #393939;
   --cds-border-strong: #8d8d8d;
-  --cds-focus: #6ea6ff;
-  --cds-button-primary: #4589ff;
-  --cds-button-primary-hover: #5b9dff;
+  --cds-focus: #f4f4f4;
+  --cds-button-primary: #ffffff;
+  --cds-button-primary-hover: #e8e8e8;
   --cds-button-secondary: #393939;
   --cds-button-secondary-hover: #4c4c4c;
-  --cds-button-tertiary: #4589ff;
-  --cds-button-tertiary-hover: #5b9dff;
-  --cds-button-danger: #4589ff;
-  --cds-button-danger-hover: #5b9dff;
+  --cds-button-tertiary: #a8a8a8;
+  --cds-button-tertiary-hover: #c6c6c6;
+  --cds-button-danger-primary: #525252;
+  --cds-button-danger-primary-hover: #6f6f6f;
   --cds-button-disabled: #525252;
-  --cds-icon-primary: #4589ff;
+  --cds-icon-primary: #f4f4f4;
+  --cds-text-error: #8d8d8d;
   --cds-overlay: rgba(0, 0, 0, 0.65);
   --font: "IBM Plex Sans", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -142,20 +143,21 @@ body[data-theme="classic-light"] {
   --cds-text-primary: #161616;
   --cds-text-secondary: #525252;
   --cds-text-on-color: #ffffff;
-  --cds-interactive: #0f62fe;
-  --cds-link-primary: #0f62fe;
+  --cds-interactive: #161616;
+  --cds-link-primary: #161616;
   --cds-border-subtle: #c6c6c6;
   --cds-border-strong: #8d8d8d;
-  --cds-focus: #0f62fe;
-  --cds-button-primary: #0f62fe;
-  --cds-button-primary-hover: #0353e9;
+  --cds-focus: #161616;
+  --cds-button-primary: #161616;
+  --cds-button-primary-hover: #383838;
   --cds-button-secondary: #ffffff;
   --cds-button-secondary-hover: #e8e8e8;
-  --cds-button-tertiary: #0f62fe;
-  --cds-button-tertiary-hover: #0353e9;
-  --cds-button-danger: #0f62fe;
-  --cds-button-danger-hover: #0353e9;
-  --cds-icon-primary: #0f62fe;
+  --cds-button-tertiary: #6f6f6f;
+  --cds-button-tertiary-hover: #8d8d8d;
+  --cds-button-danger-primary: #6f6f6f;
+  --cds-button-danger-primary-hover: #8d8d8d;
+  --cds-icon-primary: #161616;
+  --cds-text-error: #6f6f6f;
   --cds-overlay: rgba(0, 0, 0, 0.5);
   --font: "IBM Plex Sans", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }

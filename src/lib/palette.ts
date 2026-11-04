@@ -48,26 +48,26 @@ export const THEME_NAMES: ThemeName[] = [
 ];
 
 export const PALETTES: Record<ThemeName, ThemePalette> = {
-  /* 经典：IBM Carbon 官方蓝（g100 interactive #4589ff / blue-60 #0f62fe） */
+  /* 经典：黑白配色（深色白 accent / 浅色黑 accent） */
   "classic-dark": {
     dark: true,
-    background: "#0f1220",
-    surface: "#181d2f",
-    primary: "#4589ff",
-    onPrimary: "#ffffff",
-    onSurface: "#e8eaf2",
-    onSurfaceVariant: "#8a90a6",
-    error: "#f87171",
+    background: "#0a0a0a",
+    surface: "#1a1a1a",
+    primary: "#ffffff",
+    onPrimary: "#0a0a0a",
+    onSurface: "#f4f4f4",
+    onSurfaceVariant: "#8d8d8d",
+    error: "#8d8d8d",
   },
   "classic-light": {
     dark: false,
-    background: "#f2f4fa",
+    background: "#f4f4f4",
     surface: "#ffffff",
-    primary: "#0f62fe",
+    primary: "#161616",
     onPrimary: "#ffffff",
-    onSurface: "#1e2438",
-    onSurfaceVariant: "#6b7288",
-    error: "#dc2626",
+    onSurface: "#161616",
+    onSurfaceVariant: "#6f6f6f",
+    error: "#6f6f6f",
   },
   /* Material Design 3：蓝种子调色板（dark primary = tone80，light primary = tone40） */
   "material-dark": {
