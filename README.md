@@ -13,7 +13,7 @@
 - **学习记录**：最近的会话列表（时间、时长、金额），可一键清空。
 - **刷新不丢**：设置、进行中的会话、历史记录均存 localStorage；计时基于时间戳重算，页面刷新或电脑休眠后金额依然准确。
 - **八套主题**（4 设计语言 × 深/浅，顶栏切换、偏好持久化），**强调色统一为蓝色系**（各语言官方蓝）：
-  - **经典**——深色绿光毛玻璃（默认）/ 浅灰蓝白卡浅色；
+  - **经典**——由 **IBM Carbon** 官方组件库（`@carbon/vue`）实现：深色 g100 / 浅色 g10 色板、IBM Plex Sans 字体、Carbon 按钮与模态（默认）；
   - **Material**——由 **Vuetify 3**（Material Design 3 规范组件库）原生实现：深 `#141218` / 浅 `#fef7ff`，pill 按钮、elevation；
   - **Apple**——iOS 分组样式：深纯黑 / 浅 `#f2f2f7`，systemGreen、胶囊按钮；
   - **Fluent**——Windows 11：深 `#202020` / 浅 `#f3f3f3`，1px subtle stroke、4px 控件圆角、Segoe UI、accent 蓝。
@@ -34,8 +34,10 @@ npm run preview    # 预览构建产物（0.0.0.0:4173）
 
 ## 技术栈与架构
 
-- **Vue 3.5**（`<script setup lang="ts">` 组合式 API）+ **TypeScript strict** + **Vite 7** + **Vuetify 3**（Material Design 组件库，v-card/v-btn/v-text-field/v-btn-toggle/v-list/v-dialog）。
+- **Vue 3.5**（`<script setup lang="ts">` 组合式 API）+ **TypeScript strict** + **Vite 7** + **双设计系统组件库**：**Vuetify 3**（Material Design，v-card/v-btn/v-text-field/v-btn-toggle/v-list/v-dialog）+ **@carbon/vue**（IBM Carbon，经典主题 CvButton/CvTextInput/CvTile/CvList/CvModal）。
+- **按主题切换组件树**：经典 → Carbon 树，其余 → Vuetify 树；计时/主题状态在 composables 单例中，两棵树无缝共享。
 - 主题色板单一事实源 `src/lib/palette.ts`：8 套主题（`classic-dark` 等 8 名）同步驱动 Vuetify 命名主题与 `body[data-theme]` CSS 层。
+- **@carbon/vue 前缀桥接**：`@carbon/vue` 3 渲染旧类前缀 `bx--`，新版 `@carbon/styles` 为 `cds--`——`vite.config.ts` 的 `carbonPrefixFix` 插件在构建时统一 CSS 类前缀；Carbon design tokens（g100/g10 官方值）在 `themes.css` 经典块注入。
 - 组件：`src/components/`（ThemeSwitcher / WageSettings / TimerCard / StatsRow / RecordList）。
 - 核心逻辑：`src/composables/useTimer.ts`（计时状态机模块级单例）、`useTheme.ts`（主题偏好）；纯函数在 `src/lib/`（types / storage / format / wage）。
 - **主题架构**：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（`src/styles/base.css` 的 `:root` = 经典深色）；其余 7 套主题经 `src/styles/themes.css` 按 `body[data-theme]` 覆盖同名 tokens——结构与交互只有一份，换肤纯声明式。

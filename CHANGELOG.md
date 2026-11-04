@@ -2,6 +2,19 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.5.0] - 2026-11-04
+
+### Added
+
+- **经典主题改由 IBM Carbon 官方组件库 `@carbon/vue` 实现**：CvButton / CvTextInput / CvTile / CvList / CvModal（清空确认），IBM Plex Sans 字体随包内置、离线可用。
+- 按主题切换组件树：经典 → Carbon 组件树，其余设计语言 → Vuetify 组件树；状态层（composables 单例）共享，切换无缝。
+- 经典强调色改 Carbon 官方蓝（g100 `#4589ff` / blue-60 `#0f62fe`），themes.css 注入 Carbon design tokens（g100/g10 官方值全套，含 secondary/tertiary/danger/disabled 按钮）。
+
+### Changed
+
+- 新增 `vite.config.ts` 的 `carbonPrefixFix` 插件：桥接 `@carbon/vue` 3（渲染 `bx--` 前缀）与新版 `@carbon/styles`（`cds--`）的类前缀错配，token 变量 `--cds-` 不受影响。
+- 新增 `src/carbon-vue.d.ts`（`@carbon/vue` 为无类型 UMD 包）。
+
 ## [0.4.0] - 2026-11-04
 
 ### Added
