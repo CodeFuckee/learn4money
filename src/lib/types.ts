@@ -30,7 +30,7 @@ export interface StudyRecord {
   earned: number;
 }
 
-/** 设计语言主题（"" = 经典） */
-export type ThemeLang = "" | "material" | "apple" | "fluent";
+/** 设计语言主题 */
+export type ThemeLang = "classic" | "material" | "apple" | "fluent";
 /** 深/浅色模式 */
 export type ThemeMode = "dark" | "light";

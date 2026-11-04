@@ -1,31 +1,99 @@
 /* 多设计语言主题 — body[data-theme] 覆盖同名 design tokens
  *
- * 结构与交互只有一份（styles.css），每个主题只声明自己的 token 值，
- * 忠实还原各设计语言的标志性观感：
- * - Material Design 3（Material You 深色）：#1C1B1F 系 surface 层次、
- *   24px 大圆角卡片、pill 全圆按钮、Roboto、elevation 阴影、无描边
- * - Apple（iOS 深色分组样式）：纯黑背景、#1C1C1E 分组卡片、systemGreen、
- *   胶囊按钮、SF/PingFang、无阴影无描边的纯净分层
- * - Fluent Design（Windows 11 深色）：#202020 背景、#2B2B2B 卡片 + 1px
- *   subtle stroke、4px 控件圆角、Segoe UI、轻 elevation、系统 accent 蓝
- * 强调色沿用各语言的官方色板（绿色种子/系统绿/默认 accent 蓝）。
+ * 主题名 = `${设计语言}-${深/浅}`，与 Vuetify 命名主题（palette.ts）同名同步。
+ * 职责分工：
+ * - 组件颜色 tokens 由 Vuetify 命名主题提供（palette.ts，单一事实源）
+ * - 本文件提供：自绘元素的颜色变量（--accent 等，与色板保持一致）+
+ *   各设计语言的形状/字体/阴影覆盖（作用于 Vuetify 组件）
+ * 强调色统一为蓝色系（各语言官方蓝）。
  */
 
-/* —— Material Design 3 · Material You 深色 —— */
-body[data-theme="material"] {
+/* ==================== 经典 ==================== */
+body[data-theme="classic-dark"] {
+  --bg: #0f1220;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a2340 0%, var(--bg) 55%);
+  --card: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #e8eaf2;
+  --text-dim: #8a90a6;
+  --accent: #60a5fa;
+  --accent-contrast: #0b1c3d;
+  --accent-glow: rgba(96, 165, 250, 0.35);
+  --running-border: rgba(96, 165, 250, 0.4);
+  --danger: #f87171;
+  --danger-bg: rgba(248, 113, 113, 0.15);
+  --danger-bg-hover: rgba(248, 113, 113, 0.25);
+  --amber: #fbbf24;
+  --chip-bg: rgba(255, 255, 255, 0.06);
+  --item-bg: rgba(255, 255, 255, 0.04);
+  --btn2-bg: rgba(255, 255, 255, 0.1);
+  --btn2-bg-hover: rgba(255, 255, 255, 0.16);
+  --radius-card: 16px;
+  --radius-stat: 14px;
+  --radius-btn: 12px;
+  --radius-input: 10px;
+  --radius-sm: 8px;
+}
+
+body[data-theme="classic-light"] {
+  --bg: #f2f4fa;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #e3eaff 0%, var(--bg) 55%);
+  --card: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --text: #1e2438;
+  --text-dim: #6b7288;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-glow: rgba(37, 99, 235, 0.22);
+  --running-border: rgba(37, 99, 235, 0.45);
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --danger-bg-hover: rgba(220, 38, 38, 0.18);
+  --amber: #d97706;
+  --chip-bg: rgba(15, 23, 42, 0.05);
+  --item-bg: rgba(15, 23, 42, 0.04);
+  --btn2-bg: rgba(15, 23, 42, 0.08);
+  --btn2-bg-hover: rgba(15, 23, 42, 0.14);
+}
+
+/* 经典：毛玻璃卡片 + 圆角 */
+body[data-theme="classic-dark"] .v-card,
+body[data-theme="classic-light"] .v-card {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+}
+body[data-theme="classic-dark"] .v-card.stat,
+body[data-theme="classic-light"] .v-card.stat {
+  border-radius: var(--radius-stat);
+}
+body[data-theme="classic-dark"] .v-btn,
+body[data-theme="classic-light"] .v-btn {
+  border-radius: var(--radius-btn);
+}
+body[data-theme="classic-dark"] .v-field,
+body[data-theme="classic-light"] .v-field {
+  border-radius: var(--radius-input);
+}
+
+/* ==================== Material Design 3 ==================== */
+/* 颜色/组件观感主要由 Vuetify（MD 组件库）原生呈现，此处只按 M3 形状规范微调圆角 */
+body[data-theme="material-dark"] {
   --bg: #141218;
   --bg-image: none;
   --card: #1d1b20;
   --card-border: transparent;
   --text: #e6e0e9;
   --text-dim: #948f99;
-  --accent: #7fdca4;
-  --accent-contrast: #0e381f;
+  --accent: #a5c8ff;
+  --accent-contrast: #00315f;
   --accent-glow: transparent;
   --running-border: transparent;
   --danger: #f2b8b5;
   --danger-bg: rgba(242, 184, 181, 0.12);
   --danger-bg-hover: rgba(242, 184, 181, 0.24);
+  --amber: #f0bd4a;
   --chip-bg: #2b2930;
   --item-bg: #211f26;
   --btn2-bg: #2b2930;
@@ -35,42 +103,114 @@ body[data-theme="material"] {
   --radius-btn: 999px;
   --radius-input: 14px;
   --radius-sm: 12px;
-  --font: "Roboto", "Google Sans", "Noto Sans SC", "PingFang SC",
-    "Microsoft YaHei", sans-serif;
-  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
-/* —— Apple · iOS 深色分组样式 —— */
-body[data-theme="apple"] {
+body[data-theme="material-light"] {
+  --bg: #fef7ff;
+  --bg-image: none;
+  --card: #f3edf7;
+  --card-border: transparent;
+  --text: #1d1b20;
+  --text-dim: #49454f;
+  --accent: #0061a4;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #b3261e;
+  --danger-bg: rgba(179, 38, 30, 0.1);
+  --danger-bg-hover: rgba(179, 38, 30, 0.2);
+  --amber: #9a6a00;
+  --chip-bg: #ece6f0;
+  --item-bg: #f7f2fa;
+  --btn2-bg: #ece6f0;
+  --btn2-bg-hover: #e0dbe4;
+}
+
+body[data-theme^="material"] .v-card {
+  border-radius: 24px; /* M3 large */
+}
+body[data-theme="material-dark"] .v-card.stat,
+body[data-theme="material-light"] .v-card.stat {
+  border-radius: 20px;
+}
+body[data-theme^="material"] .v-btn {
+  border-radius: 999px; /* M3 pill 按钮 */
+  font-weight: 600;
+}
+body[data-theme^="material"] .v-field {
+  border-radius: 14px;
+}
+body[data-theme^="material"] .v-list-item {
+  border-radius: 12px;
+}
+
+/* ==================== Apple（iOS 分组样式） ==================== */
+body[data-theme="apple-dark"] {
   --bg: #000000;
   --bg-image: none;
   --card: #1c1c1e;
   --card-border: transparent;
   --text: #f2f2f7;
   --text-dim: #8e8e93;
-  --accent: #30d158;
+  --accent: #0a84ff;
   --accent-contrast: #ffffff;
   --accent-glow: transparent;
   --running-border: transparent;
   --danger: #ff453a;
   --danger-bg: rgba(255, 69, 58, 0.15);
   --danger-bg-hover: rgba(255, 69, 58, 0.28);
+  --amber: #ffd60a;
   --chip-bg: #2c2c2e;
   --item-bg: #2c2c2e;
   --btn2-bg: #2c2c2e;
   --btn2-bg-hover: #3a3a3c;
-  --radius-card: 18px;
-  --radius-stat: 16px;
-  --radius-btn: 999px;
-  --radius-input: 12px;
-  --radius-sm: 10px;
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
-    "Helvetica Neue", sans-serif;
-  --shadow-card: none;
 }
 
-/* —— Fluent Design · Windows 11 深色 —— */
-body[data-theme="fluent"] {
+body[data-theme="apple-light"] {
+  --bg: #f2f2f7;
+  --bg-image: none;
+  --card: #ffffff;
+  --card-border: transparent;
+  --text: #000000;
+  --text-dim: #8a8a8e;
+  --accent: #007aff;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #ff3b30;
+  --danger-bg: rgba(255, 59, 48, 0.1);
+  --danger-bg-hover: rgba(255, 59, 48, 0.2);
+  --amber: #ffcc00;
+  --chip-bg: rgba(118, 118, 128, 0.12);
+  --item-bg: rgba(118, 118, 128, 0.12);
+  --btn2-bg: rgba(118, 118, 128, 0.12);
+  --btn2-bg-hover: rgba(118, 118, 128, 0.22);
+}
+
+/* Apple：胶囊按钮、无阴影纯净分层 */
+body[data-theme^="apple"] .v-card {
+  border-radius: 18px;
+  box-shadow: none !important;
+}
+body[data-theme^="apple"] .v-card.stat {
+  border-radius: 16px;
+}
+body[data-theme^="apple"] .v-btn {
+  border-radius: 999px;
+  box-shadow: none !important;
+  font-weight: 600;
+}
+body[data-theme^="apple"] .v-field {
+  border-radius: 12px;
+  box-shadow: none !important;
+}
+body[data-theme^="apple"] .v-btn__overlay,
+body[data-theme^="apple"] .v-btn__underlay {
+  display: none; /* iOS 无 ripple/状态层 */
+}
+
+/* ==================== Fluent（Windows 11） ==================== */
+body[data-theme="fluent-dark"] {
   --bg: #202020;
   --bg-image: none;
   --card: #2b2b2b;
@@ -84,88 +224,13 @@ body[data-theme="fluent"] {
   --danger: #ff99a4;
   --danger-bg: rgba(255, 153, 164, 0.12);
   --danger-bg-hover: rgba(255, 153, 164, 0.22);
+  --amber: #ffd33e;
   --chip-bg: #323232;
   --item-bg: #303030;
   --btn2-bg: #373737;
   --btn2-bg-hover: #404040;
-  --radius-card: 8px;
-  --radius-stat: 8px;
-  --radius-btn: 4px;
-  --radius-input: 4px;
-  --radius-sm: 4px;
-  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, "Microsoft YaHei",
-    sans-serif;
-  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.28);
 }
 
-/* ==================== 浅色系列 ==================== */
-
-/* —— 经典 · 浅色 —— */
-body[data-theme="classic-light"] {
-  --bg: #f2f4fa;
-  --bg-image: radial-gradient(1200px 800px at 70% -10%, #e4eaff 0%, var(--bg) 55%);
-  --card: rgba(255, 255, 255, 0.78);
-  --card-border: rgba(15, 23, 42, 0.08);
-  --text: #1e2438;
-  --text-dim: #6b7288;
-  --accent: #10b981;
-  --accent-contrast: #ffffff;
-  --accent-glow: rgba(16, 185, 129, 0.28);
-  --running-border: rgba(16, 185, 129, 0.45);
-  --danger: #dc2626;
-  --danger-bg: rgba(220, 38, 38, 0.1);
-  --danger-bg-hover: rgba(220, 38, 38, 0.18);
-  --amber: #d97706;
-  --chip-bg: rgba(15, 23, 42, 0.05);
-  --item-bg: rgba(15, 23, 42, 0.04);
-  --btn2-bg: rgba(15, 23, 42, 0.08);
-  --btn2-bg-hover: rgba(15, 23, 42, 0.14);
-}
-
-/* —— Material Design 3 · 浅色 —— */
-body[data-theme="material-light"] {
-  --bg: #fef7ff;
-  --bg-image: none;
-  --card: #f3edf7;
-  --card-border: transparent;
-  --text: #1d1b20;
-  --text-dim: #49454f;
-  --accent: #006d43;
-  --accent-contrast: #ffffff;
-  --accent-glow: transparent;
-  --running-border: transparent;
-  --danger: #b3261e;
-  --danger-bg: rgba(179, 38, 30, 0.1);
-  --danger-bg-hover: rgba(179, 38, 30, 0.2);
-  --chip-bg: #ece6f0;
-  --item-bg: #f7f2fa;
-  --btn2-bg: #ece6f0;
-  --btn2-bg-hover: #e0dbe4;
-  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.12);
-}
-
-/* —— Apple · iOS 浅色分组样式 —— */
-body[data-theme="apple-light"] {
-  --bg: #f2f2f7;
-  --bg-image: none;
-  --card: #ffffff;
-  --card-border: transparent;
-  --text: #000000;
-  --text-dim: #8a8a8e;
-  --accent: #34c759;
-  --accent-contrast: #ffffff;
-  --accent-glow: transparent;
-  --running-border: transparent;
-  --danger: #ff3b30;
-  --danger-bg: rgba(255, 59, 48, 0.1);
-  --danger-bg-hover: rgba(255, 59, 48, 0.2);
-  --chip-bg: rgba(118, 118, 128, 0.12);
-  --item-bg: rgba(118, 118, 128, 0.12);
-  --btn2-bg: rgba(118, 118, 128, 0.12);
-  --btn2-bg-hover: rgba(118, 118, 128, 0.22);
-}
-
-/* —— Fluent Design · Windows 11 浅色 —— */
 body[data-theme="fluent-light"] {
   --bg: #f3f3f3;
   --bg-image: none;
@@ -180,9 +245,29 @@ body[data-theme="fluent-light"] {
   --danger: #c42b1c;
   --danger-bg: rgba(196, 43, 28, 0.08);
   --danger-bg-hover: rgba(196, 43, 28, 0.15);
+  --amber: #c19c00;
   --chip-bg: #ececec;
   --item-bg: #f6f6f6;
   --btn2-bg: #f0f0f0;
   --btn2-bg-hover: #e5e5e5;
-  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Fluent：4px 控件圆角 + subtle stroke，弱阴影 */
+body[data-theme^="fluent"] .v-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--card-border);
+}
+body[data-theme^="fluent"] .v-btn {
+  border-radius: 4px;
+}
+body[data-theme^="fluent"] .v-field {
+  border-radius: 4px;
+}
+body[data-theme^="fluent"] .v-list-item {
+  border-radius: 4px;
+}
+body[data-theme^="fluent"] .v-btn__overlay,
+body[data-theme^="fluent"] .v-btn__underlay {
+  display: none; /* Fluent 无 ripple */
 }

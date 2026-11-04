@@ -1,28 +1,35 @@
-/** 主题管理：设计语言（经典/Material/Apple/Fluent） × 深/浅模式
+/** 主题管理：设计语言（经典/Material/Apple/Fluent） × 深/浅模式 = 8 套主题
  *
- * body[data-theme] 值：经典深 = 无属性，其余为 `${lang}` 或 `${lang}-light`。
- * 选择持久化到 localStorage，刷新保持。
+ * 同步驱动两套主题载体：
+ * - Vuetify 命名主题（组件颜色 tokens）
+ * - body[data-theme]（themes.css 的形状/字体/自绘元素覆盖）
+ * 主题名统一为 `${lang}-${mode}`（如 material-light），偏好持久化到 localStorage。
  */
 import { ref, watch } from "vue";
 import { loadJSON, saveJSON } from "../lib/storage";
+import { themeName } from "../lib/palette";
 import type { ThemeLang, ThemeMode } from "../lib/types";
+import { vuetify } from "../plugins/vuetify";
 
 const KEYS = { lang: "l4m.themeLang", mode: "l4m.themeMode" } as const;
 
-const THEME_LANGS: ThemeLang[] = ["", "material", "apple", "fluent"];
+const THEME_LANGS: ThemeLang[] = ["classic", "material", "apple", "fluent"];
 
-const themeLang = ref<ThemeLang>(loadJSON<ThemeLang>(KEYS.lang, ""));
-const themeMode = ref<ThemeMode>(loadJSON<ThemeMode>(KEYS.mode, "dark"));
-
-function dataThemeValue(lang: ThemeLang, mode: ThemeMode): string {
-  if (!lang) return mode === "light" ? "classic-light" : "";
-  return mode === "light" ? `${lang}-light` : lang;
+function normalizeLang(v: unknown): ThemeLang {
+  return THEME_LANGS.includes(v as ThemeLang) ? (v as ThemeLang) : "classic";
 }
 
+function normalizeMode(v: unknown): ThemeMode {
+  return v === "light" ? "light" : "dark";
+}
+
+const themeLang = ref<ThemeLang>(normalizeLang(loadJSON<ThemeLang>(KEYS.lang, "classic")));
+const themeMode = ref<ThemeMode>(normalizeMode(loadJSON<ThemeMode>(KEYS.mode, "dark")));
+
 function applyTheme(): void {
-  const v = dataThemeValue(themeLang.value, themeMode.value);
-  if (v) document.body.dataset.theme = v;
-  else delete document.body.dataset.theme;
+  const name = themeName(themeLang.value, themeMode.value);
+  vuetify.theme.global.name.value = name;
+  document.body.dataset.theme = name;
 }
 
 function setThemeLang(lang: ThemeLang): void {

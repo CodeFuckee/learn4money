@@ -8,18 +8,22 @@ import { BookOpen } from "lucide-vue-next";
 </script>
 
 <template>
-  <div class="page">
-    <header class="page-header">
-      <h1><BookOpen class="ic ic-title" />学习挣钱</h1>
-      <p class="subtitle">学一分钟，挣一分钟的钱</p>
-    </header>
+  <v-app>
+    <v-main>
+      <div class="page">
+        <header class="page-header">
+          <h1><BookOpen class="ic ic-title" />学习挣钱</h1>
+          <p class="subtitle">学一分钟，挣一分钟的钱</p>
+        </header>
 
-    <ThemeSwitcher />
-    <WageSettings />
-    <TimerCard />
-    <StatsRow />
-    <RecordList />
+        <ThemeSwitcher />
+        <WageSettings />
+        <TimerCard />
+        <StatsRow />
+        <RecordList />
 
-    <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
-  </div>
+        <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
+      </div>
+    </v-main>
+  </v-app>
 </template>

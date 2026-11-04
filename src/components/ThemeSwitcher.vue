@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Moon, Palette, Sun } from "lucide-vue-next";
+import { Palette, Sun, Moon } from "lucide-vue-next";
 import { useTheme } from "../composables/useTheme";
 import type { ThemeLang } from "../lib/types";
 
 const { themeLang, themeMode, THEME_LANGS, setThemeLang, toggleThemeMode } = useTheme();
 
 const LABELS: Record<ThemeLang, string> = {
-  "": "经典",
+  classic: "经典",
   material: "Material",
   apple: "Apple",
   fluent: "Fluent",
@@ -16,25 +16,36 @@ const LABELS: Record<ThemeLang, string> = {
 <template>
   <div class="theme-bar">
     <span class="theme-label"><Palette class="ic ic-sm" />主题</span>
-    <div class="theme-switch" id="themeSwitch" role="radiogroup" aria-label="界面主题">
-      <button
+    <v-btn-toggle
+      id="themeSwitch"
+      class="theme-switch"
+      :model-value="themeLang"
+      mandatory
+      color="primary"
+      aria-label="界面主题"
+      @update:model-value="setThemeLang($event as ThemeLang)"
+    >
+      <v-btn
         v-for="lang in THEME_LANGS"
         :key="lang"
-        class="theme-btn"
-        :class="{ active: themeLang === lang }"
+        :value="lang"
         :data-theme="lang"
-        @click="setThemeLang(lang)"
-      >{{ LABELS[lang] }}</button>
-    </div>
-    <button
+        size="small"
+      >{{ LABELS[lang] }}</v-btn>
+    </v-btn-toggle>
+    <v-btn
       id="themeModeToggle"
       class="mode-toggle"
+      icon
+      variant="tonal"
+      color="primary"
+      size="small"
       :title="themeMode === 'dark' ? '切换到浅色' : '切换到深色'"
       :aria-label="themeMode === 'dark' ? '切换到浅色' : '切换到深色'"
       @click="toggleThemeMode"
     >
       <Sun v-if="themeMode === 'dark'" class="ic ic-sm" />
       <Moon v-else class="ic ic-sm" />
-    </button>
+    </v-btn>
   </div>
 </template>

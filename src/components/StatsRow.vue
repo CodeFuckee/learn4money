@@ -6,18 +6,18 @@ const { stats } = useTimer();
 </script>
 
 <template>
-  <section class="stats-row">
-    <div class="stat">
+  <div class="stats-row">
+    <v-card class="stat card-el">
       <div class="stat-value" id="todayEarned">¥{{ stats.todayEarned.toFixed(2) }}</div>
       <div class="stat-label">今日收入</div>
-    </div>
-    <div class="stat">
+    </v-card>
+    <v-card class="stat card-el">
       <div class="stat-value" id="todayDuration">{{ fmtDurationCN(stats.todaySeconds) }}</div>
       <div class="stat-label">今日学习</div>
-    </div>
-    <div class="stat">
+    </v-card>
+    <v-card class="stat card-el">
       <div class="stat-value" id="totalEarned">¥{{ stats.totalEarned.toFixed(2) }}</div>
       <div class="stat-label">累计收入</div>
-    </div>
-  </section>
+    </v-card>
+  </div>
 </template>

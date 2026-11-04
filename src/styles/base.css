@@ -1,8 +1,10 @@
-/* 学习挣钱看板 — 基础样式 + 经典主题 tokens
+/* 学习挣钱看板 — 基础样式 + 经典深色 tokens 兜底
  *
- * 架构：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（:root = 经典主题），
- * Material / Apple / Fluent 三套设计语言主题由 themes.css 按 body[data-theme]
- * 覆盖同名 tokens 实现，结构与交互只有一份。
+ * 架构：
+ * - 组件颜色由 Vuetify 命名主题提供（src/lib/palette.ts 单一事实源）
+ * - 本文件：自绘元素样式 + :root 兜底 tokens（classic-dark，防主题注入前闪烁）+
+ *   对 Vuetify 组件的通用全局调整
+ * - 8 套主题的形状/字体/自绘颜色变量见 themes.css（body[data-theme]）
  */
 * {
   margin: 0;
@@ -11,35 +13,27 @@
 }
 
 :root {
-  /* 色彩（默认 = 经典风格） */
+  /* 兜底 tokens（= classic-dark；正常情况下 themes.css 按 body[data-theme] 生效） */
   --bg: #0f1220;
-  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a1f3a 0%, var(--bg) 55%);
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a2340 0%, var(--bg) 55%);
   --card: rgba(255, 255, 255, 0.05);
   --card-border: rgba(255, 255, 255, 0.08);
   --text: #e8eaf2;
   --text-dim: #8a90a6;
-  --accent: #34d399;
-  --accent-contrast: #06281c;
-  --accent-glow: rgba(52, 211, 153, 0.35);
-  --running-border: rgba(52, 211, 153, 0.4);
+  --accent: #60a5fa;
+  --accent-contrast: #0b1c3d;
+  --accent-glow: rgba(96, 165, 250, 0.35);
+  --running-border: rgba(96, 165, 250, 0.4);
   --danger: #f87171;
   --danger-bg: rgba(248, 113, 113, 0.15);
-  --danger-bg-hover: rgba(248, 113, 113, 0.25);
   --amber: #fbbf24;
   --chip-bg: rgba(255, 255, 255, 0.06);
   --item-bg: rgba(255, 255, 255, 0.04);
-  --btn2-bg: rgba(255, 255, 255, 0.1);
-  --btn2-bg-hover: rgba(255, 255, 255, 0.16);
-  /* 形状 */
   --radius-card: 16px;
   --radius-stat: 14px;
-  --radius-btn: 12px;
-  --radius-input: 10px;
   --radius-sm: 8px;
-  /* 字体与阴影 */
   --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
     "Segoe UI", sans-serif;
-  --shadow-card: none;
 }
 
 body {
@@ -50,6 +44,61 @@ body {
   min-height: 100vh;
 }
 
+/* ---------- Vuetify 全局调整 ---------- */
+
+/* 页面背景交给 body 的 tokens（渐变等），v-app 透出 */
+.v-application {
+  background: transparent !important;
+  font-family: var(--font) !important;
+  color: var(--text);
+}
+
+/* 各设计语言均为 sentence case（Vuetify 默认 uppercase 是 M2 遗产，对拉丁文也要去掉） */
+.v-btn {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* 按钮/内容插槽内的图标与文字间距（v-btn default slot 不自动排版） */
+.v-btn__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* 卡片内容内边距（v-card 自身样式后加载会覆盖同权重规则，用双类名提高权重） */
+.v-card.card-el {
+  padding: 18px;
+}
+.v-card.dialog-el {
+  padding: 0; /* v-card-title/text/actions 自带 padding */
+}
+
+/* 工资输入在 flex 行中可收缩（防 number input 固有宽度撑爆布局） */
+.settings-row .wage-input {
+  flex: 1;
+  min-width: 0;
+}
+.wage-input .v-field {
+  background: var(--chip-bg);
+}
+
+/* 记录列表嵌在卡片内，透出卡片底色 */
+.record-list.v-list {
+  background: transparent;
+}
+
+/* ---------- Lucide 图标 ---------- */
+.ic {
+  flex-shrink: 0;
+}
+.ic-title { width: 24px; height: 24px; color: var(--accent); }
+.ic-card  { width: 15px; height: 15px; color: var(--text-dim); }
+.ic-btn   { width: 16px; height: 16px; }
+.ic-sm    { width: 14px; height: 14px; color: var(--text-dim); }
+.ic-xs    { width: 12px; height: 12px; }
+
+/* ---------- 页面骨架 ---------- */
 .page {
   max-width: 520px;
   margin: 0 auto;
@@ -80,17 +129,6 @@ body {
   font-size: 13px;
 }
 
-/* ---------- Lucide 图标 ---------- */
-/* createIcons 会把 <i data-lucide class="ic ..."> 替换为 <svg class="lucide ... ic ...">，样式经 class 保留 */
-.ic {
-  flex-shrink: 0;
-}
-.ic-title { width: 24px; height: 24px; color: var(--accent); }
-.ic-card  { width: 15px; height: 15px; color: var(--text-dim); }
-.ic-btn   { width: 16px; height: 16px; }
-.ic-sm    { width: 14px; height: 14px; color: var(--text-dim); }
-.ic-xs    { width: 12px; height: 12px; }
-
 /* ---------- 主题切换 ---------- */
 .theme-bar {
   display: flex;
@@ -108,62 +146,13 @@ body {
   color: var(--text-dim);
 }
 
-.theme-switch {
-  display: flex;
-  gap: 2px;
+.theme-switch.v-btn-toggle {
   background: var(--chip-bg);
-  border-radius: var(--radius-input);
   padding: 3px;
+  gap: 2px;
 }
 
-.theme-btn {
-  border: none;
-  background: transparent;
-  color: var(--text-dim);
-  font-size: 12.5px;
-  font-family: inherit;
-  padding: 6px 13px;
-  border-radius: calc(var(--radius-input) - 3px);
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-
-.theme-btn.active {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  font-weight: 600;
-}
-
-.mode-toggle {
-  border: none;
-  background: var(--chip-bg);
-  color: var(--text-dim);
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-input);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.15s;
-  flex-shrink: 0;
-}
-
-.mode-toggle:hover {
-  color: var(--accent);
-}
-
-/* ---------- 卡片 ---------- */
-.card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-card);
-  padding: 18px;
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow-card);
-}
-
+/* ---------- 卡片内标题 ---------- */
 .card-title {
   font-size: 14px;
   font-weight: 600;
@@ -181,70 +170,17 @@ body {
   align-items: center;
 }
 
-.mode-switch {
-  display: flex;
-  background: var(--chip-bg);
-  border-radius: var(--radius-input);
-  padding: 3px;
-  flex-shrink: 0;
-}
-
-.mode-btn {
-  border: none;
-  background: transparent;
+.rate-hint {
+  margin-top: 10px;
+  font-size: 12px;
   color: var(--text-dim);
-  font-size: 14px;
-  font-family: inherit;
-  padding: 7px 16px;
-  border-radius: calc(var(--radius-input) - 3px);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.mode-btn.active {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  font-weight: 600;
-}
-
-.wage-input-wrap {
-  flex: 1;
-  min-width: 0; /* 必须显式归零：否则 number input 的固有宽度（随主题字体回退变化）会撑爆 flex 收缩 */
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--chip-bg);
-  border-radius: var(--radius-input);
-  padding: 8px 12px;
 }
 
 .wage-unit {
   color: var(--text-dim);
   font-size: 13px;
   white-space: nowrap;
-}
-
-#wageInput {
-  flex: 1;
-  min-width: 0;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-size: 18px;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  font-family: inherit;
-}
-
-#wageInput:disabled {
-  opacity: 0.5;
-}
-
-.rate-hint {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--text-dim);
+  flex-shrink: 0;
 }
 
 /* ---------- 主看板 ---------- */
@@ -255,8 +191,8 @@ body {
 }
 
 .main-card.running {
-  box-shadow: 0 0 40px var(--accent-glow);
-  border-color: var(--running-border);
+  box-shadow: 0 0 40px var(--accent-glow) !important;
+  border-color: var(--running-border) !important;
 }
 
 .earned-label {
@@ -321,55 +257,6 @@ body {
   justify-content: center;
 }
 
-.btn {
-  border: none;
-  border-radius: var(--radius-btn);
-  font-size: 15px;
-  font-weight: 600;
-  font-family: inherit;
-  padding: 12px 22px;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-}
-
-.btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: var(--accent-contrast);
-  flex: 1;
-  max-width: 160px;
-}
-
-.btn-primary:not(:disabled):hover {
-  filter: brightness(1.1);
-}
-
-.btn-secondary {
-  background: var(--btn2-bg);
-  color: var(--text);
-}
-
-.btn-secondary:not(:disabled):hover {
-  background: var(--btn2-bg-hover);
-}
-
-.btn-danger {
-  background: var(--danger-bg);
-  color: var(--danger);
-}
-
-.btn-danger:not(:disabled):hover {
-  background: var(--danger-bg-hover);
-}
-
 /* ---------- 统计 ---------- */
 .stats-row {
   display: flex;
@@ -378,12 +265,8 @@ body {
 
 .stat {
   flex: 1;
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-stat);
-  padding: 14px 8px;
+  padding: 14px 8px !important;
   text-align: center;
-  box-shadow: var(--shadow-card);
 }
 
 .stat-value {
@@ -410,26 +293,7 @@ body {
   margin-bottom: 0;
 }
 
-.btn-link {
-  border: none;
-  background: transparent;
-  color: var(--danger);
-  font-size: 12px;
-  font-family: inherit;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.btn-link:hover {
-  background: var(--danger-bg);
-}
-
 .record-list {
-  list-style: none;
   margin-top: 12px;
   display: flex;
   flex-direction: column;
@@ -439,32 +303,24 @@ body {
 }
 
 .record-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
   background: var(--item-bg);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
   font-size: 13px;
 }
 
-.record-time {
-  color: var(--text-dim);
-  flex-shrink: 0;
+.record-item .v-list-item-title {
+  color: var(--text);
 }
 
-.record-detail {
-  flex: 1;
-  text-align: center;
-  color: var(--text);
+.record-item .v-list-item-subtitle {
+  color: var(--text-dim);
 }
 
 .record-earned {
   color: var(--accent);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  flex-shrink: 0;
+  font-size: 14px;
+  padding-left: 10px;
 }
 
 .empty-hint {
@@ -497,7 +353,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 16px;
+    padding: 10px 16px !important;
   }
   .stat-label {
     margin-top: 0;
