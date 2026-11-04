@@ -12,29 +12,40 @@
 - **统计**：今日收入、今日学习时长、累计收入（含进行中的会话）。
 - **学习记录**：最近的会话列表（时间、时长、金额），可一键清空。
 - **刷新不丢**：设置、进行中的会话、历史记录均存 localStorage；计时基于时间戳重算，页面刷新或电脑休眠后金额依然准确。
-- **四套设计语言主题**（顶栏切换，选择持久化）：
-  - **经典**——深色绿光、毛玻璃卡片（默认）；
-  - **Material**——Material Design 3 / Material You 深色：surface 层次、24px 大圆角、pill 全圆按钮、Roboto、elevation 阴影；
-  - **Apple**——iOS 深色分组样式：纯黑背景、`#1C1C1E` 分组卡片、systemGreen、胶囊按钮；
-  - **Fluent**——Windows 11 深色：`#202020`/`#2B2B2B` + 1px subtle stroke、4px 控件圆角、Segoe UI、系统 accent 蓝。
+- **八套主题**（4 设计语言 × 深/浅，顶栏切换、偏好持久化）：
+  - **经典**——深色绿光毛玻璃（默认）/ 浅灰蓝白卡浅色；
+  - **Material**——Material Design 3（Material You）：深 `#141218` / 浅 `#fef7ff`，24px 大圆角、pill 按钮、Roboto、elevation；
+  - **Apple**——iOS 分组样式：深纯黑 / 浅 `#f2f2f7`，systemGreen、胶囊按钮；
+  - **Fluent**——Windows 11：深 `#202020` / 浅 `#f3f3f3`，1px subtle stroke、4px 控件圆角、Segoe UI、accent 蓝。
 - 不足 5 秒的会话视为误触，不入记录。
 
 ## 运行
 
-**在线访问**（GitHub Pages）：https://codefuckee.github.io/learn4money/
+**在线访问**（GitHub Pages，push main 自动部署）：https://codefuckee.github.io/learn4money/
 
-本地运行，纯静态页面，无构建：
+本地开发：
 
 ```bash
-python3 -m http.server 8765 --bind 0.0.0.0
-# 打开 http://localhost:8765
+npm install
+npm run dev        # 开发服务器（0.0.0.0:5173）
+npm run build      # 类型检查（vue-tsc）+ 构建到 dist/
+npm run preview    # 预览构建产物（0.0.0.0:4173）
 ```
 
-（直接双击 `index.html` 用浏览器打开也可以运行。）
+## 技术栈与架构
 
-## 技术说明
+- **Vue 3.5**（`<script setup lang="ts">` 组合式 API）+ **TypeScript strict** + **Vite 7**。
+- 组件：`src/components/`（ThemeSwitcher / WageSettings / TimerCard / StatsRow / RecordList）。
+- 核心逻辑：`src/composables/useTimer.ts`（计时状态机模块级单例）、`useTheme.ts`（主题偏好）；纯函数在 `src/lib/`（types / storage / format / wage）。
+- **主题架构**：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（`src/styles/base.css` 的 `:root` = 经典深色）；其余 7 套主题经 `src/styles/themes.css` 按 `body[data-theme]` 覆盖同名 tokens——结构与交互只有一份，换肤纯声明式。
+- 图标：[lucide-vue-next](https://lucide.dev)（ISC 许可）官方 Vue 组件，按需 tree-shake；库加载失败不影响功能。
+- GitHub Pages 经 `.github/workflows/deploy.yml` 自动构建部署（`npm ci` → `npm run build` → deploy-pages），站点基路径 `/learn4money/`（`vite.config.ts` 的 `base`）。
 
-- 原生 HTML/CSS/JS 单页应用。
-- **主题架构**：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（`styles.css` 的 `:root` = 经典主题）；Material / Apple / Fluent 由 `themes.css` 按 `body[data-theme]` 覆盖同名 tokens 实现——结构与交互只有一份，皮肤只有声明。
-- 图标统一使用 [Lucide](https://lucide.dev)（ISC 许可），库文件内置在 `vendor/lucide.min.js`，无任何运行时 CDN/网络请求，离线可用；库加载失败时页面功能不受影响（仅无图标）。
-- 金额 = 已学秒数 × (时薪 ÷ 3600)，每帧从 `Date.now() - startTs - 暂停累计` 重算，不使用累加器，避免计时漂移。
+## 数据说明
+
+| localStorage key | 内容 |
+| --- | --- |
+| `l4m.settings` | `{mode: 'monthly'\|'hourly', monthly, hourly}` |
+| `l4m.session` | 进行中会话 `{running, paused, startTs, pausedAccum, pausedAt}`，结束即删除 |
+| `l4m.records` | 记录数组（新的在前）`{id, date, startIso, endIso, seconds, earned}` |
+| `l4m.themeLang` / `l4m.themeMode` | 主题偏好：设计语言与深/浅模式 |

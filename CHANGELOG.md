@@ -2,6 +2,22 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.3.0] - 2026-11-04
+
+### Added
+
+- 全部设计语言新增浅色主题：4 设计语言 × 深/浅 = 8 套主题；主题切换器新增深/浅 toggle（Sun/Moon 图标），偏好持久化。
+- GitHub Actions 自动部署 Pages（`.github/workflows/deploy.yml`）：push main → `npm ci` + `npm run build` → deploy-pages。
+
+### Changed
+
+- **重构：迁移至 Vue 3.5 + TypeScript（strict）+ Vite 7**：
+  - 组件化拆分（ThemeSwitcher / WageSettings / TimerCard / StatsRow / RecordList）；
+  - 计时状态机与主题偏好抽为 composables（模块级单例），纯函数抽至 `src/lib/`；
+  - 图标从 Lucide UMD 全量包（375KB）改为 lucide-vue-next 官方组件按需引入，构建产物 gzip 31KB；
+  - 构建含 `vue-tsc --noEmit` 类型检查门禁。
+- 部署方式从「Pages 直接服务 main 分支静态文件」改为「Actions 构建后部署 dist」，站点基路径 `/learn4money/`。
+
 ## [0.2.0] - 2026-11-04
 
 ### Added
