@@ -97,3 +97,92 @@ body[data-theme="fluent"] {
     sans-serif;
   --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.28);
 }
+
+/* ==================== 浅色系列 ==================== */
+
+/* —— 经典 · 浅色 —— */
+body[data-theme="classic-light"] {
+  --bg: #f2f4fa;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #e4eaff 0%, var(--bg) 55%);
+  --card: rgba(255, 255, 255, 0.78);
+  --card-border: rgba(15, 23, 42, 0.08);
+  --text: #1e2438;
+  --text-dim: #6b7288;
+  --accent: #10b981;
+  --accent-contrast: #ffffff;
+  --accent-glow: rgba(16, 185, 129, 0.28);
+  --running-border: rgba(16, 185, 129, 0.45);
+  --danger: #dc2626;
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --danger-bg-hover: rgba(220, 38, 38, 0.18);
+  --amber: #d97706;
+  --chip-bg: rgba(15, 23, 42, 0.05);
+  --item-bg: rgba(15, 23, 42, 0.04);
+  --btn2-bg: rgba(15, 23, 42, 0.08);
+  --btn2-bg-hover: rgba(15, 23, 42, 0.14);
+}
+
+/* —— Material Design 3 · 浅色 —— */
+body[data-theme="material-light"] {
+  --bg: #fef7ff;
+  --bg-image: none;
+  --card: #f3edf7;
+  --card-border: transparent;
+  --text: #1d1b20;
+  --text-dim: #49454f;
+  --accent: #006d43;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #b3261e;
+  --danger-bg: rgba(179, 38, 30, 0.1);
+  --danger-bg-hover: rgba(179, 38, 30, 0.2);
+  --chip-bg: #ece6f0;
+  --item-bg: #f7f2fa;
+  --btn2-bg: #ece6f0;
+  --btn2-bg-hover: #e0dbe4;
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* —— Apple · iOS 浅色分组样式 —— */
+body[data-theme="apple-light"] {
+  --bg: #f2f2f7;
+  --bg-image: none;
+  --card: #ffffff;
+  --card-border: transparent;
+  --text: #000000;
+  --text-dim: #8a8a8e;
+  --accent: #34c759;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #ff3b30;
+  --danger-bg: rgba(255, 59, 48, 0.1);
+  --danger-bg-hover: rgba(255, 59, 48, 0.2);
+  --chip-bg: rgba(118, 118, 128, 0.12);
+  --item-bg: rgba(118, 118, 128, 0.12);
+  --btn2-bg: rgba(118, 118, 128, 0.12);
+  --btn2-bg-hover: rgba(118, 118, 128, 0.22);
+}
+
+/* —— Fluent Design · Windows 11 浅色 —— */
+body[data-theme="fluent-light"] {
+  --bg: #f3f3f3;
+  --bg-image: none;
+  --card: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.0578);
+  --text: #1b1b1b;
+  --text-dim: #5d5d5d;
+  --accent: #005fb8;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: rgba(0, 95, 184, 0.45);
+  --danger: #c42b1c;
+  --danger-bg: rgba(196, 43, 28, 0.08);
+  --danger-bg-hover: rgba(196, 43, 28, 0.15);
+  --chip-bg: #ececec;
+  --item-bg: #f6f6f6;
+  --btn2-bg: #f0f0f0;
+  --btn2-bg-hover: #e5e5e5;
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

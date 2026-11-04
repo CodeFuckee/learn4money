@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Palette } from "lucide-vue-next";
+import { Moon, Palette, Sun } from "lucide-vue-next";
 import { useTheme } from "../composables/useTheme";
 import type { ThemeLang } from "../lib/types";
 
-const { themeLang, THEME_LANGS, setThemeLang } = useTheme();
+const { themeLang, themeMode, THEME_LANGS, setThemeLang, toggleThemeMode } = useTheme();
 
 const LABELS: Record<ThemeLang, string> = {
   "": "经典",
@@ -26,5 +26,15 @@ const LABELS: Record<ThemeLang, string> = {
         @click="setThemeLang(lang)"
       >{{ LABELS[lang] }}</button>
     </div>
+    <button
+      id="themeModeToggle"
+      class="mode-toggle"
+      :title="themeMode === 'dark' ? '切换到浅色' : '切换到深色'"
+      :aria-label="themeMode === 'dark' ? '切换到浅色' : '切换到深色'"
+      @click="toggleThemeMode"
+    >
+      <Sun v-if="themeMode === 'dark'" class="ic ic-sm" />
+      <Moon v-else class="ic ic-sm" />
+    </button>
   </div>
 </template>
