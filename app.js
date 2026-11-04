@@ -12,7 +12,10 @@ const STORAGE_KEYS = {
   settings: "l4m.settings",
   session: "l4m.session",
   records: "l4m.records",
+  theme: "l4m.theme",
 };
+
+const THEMES = ["", "material", "apple", "fluent"]; // "" = 经典
 
 const MIN_RECORD_SECONDS = 5; // 少于 5 秒视为误触，不记录
 
@@ -338,6 +341,23 @@ $("clearBtn").addEventListener("click", () => {
   }
 });
 
+// ---------- 主题切换 ----------
+
+function setTheme(theme) {
+  if (!THEMES.includes(theme)) theme = "";
+  if (theme) document.body.dataset.theme = theme;
+  else delete document.body.dataset.theme;
+  saveJSON(STORAGE_KEYS.theme, theme);
+  document
+    .querySelectorAll(".theme-btn")
+    .forEach((b) => b.classList.toggle("active", b.dataset.theme === theme));
+}
+
+$("themeSwitch").addEventListener("click", (e) => {
+  const btn = e.target.closest(".theme-btn");
+  if (btn) setTheme(btn.dataset.theme);
+});
+
 // ---------- 启动 ----------
 
 // 恢复上次的工资模式高亮
@@ -347,6 +367,7 @@ document
 
 render();
 tick();
+setTheme(loadJSON(STORAGE_KEYS.theme, ""));
 
 // 渲染 Lucide 图标（vendor 加载失败时页面仍完整可用，只是无图标）
 if (window.lucide) lucide.createIcons();

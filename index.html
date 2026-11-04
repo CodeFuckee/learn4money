@@ -3,15 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>学习挣钱看板</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <title>学习挣钱看板</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="themes.css">
+  </head>
+  <body>
   <div class="page">
     <header class="page-header">
       <h1><i data-lucide="book-open" class="ic ic-title"></i>学习挣钱</h1>
       <p class="subtitle">学一分钟，挣一分钟的钱</p>
     </header>
+
+    <!-- 主题切换 -->
+    <div class="theme-bar">
+      <span class="theme-label"><i data-lucide="palette" class="ic ic-sm"></i>主题</span>
+      <div class="theme-switch" id="themeSwitch" role="radiogroup" aria-label="界面主题">
+        <button class="theme-btn active" data-theme="">经典</button>
+        <button class="theme-btn" data-theme="material">Material</button>
+        <button class="theme-btn" data-theme="apple">Apple</button>
+        <button class="theme-btn" data-theme="fluent">Fluent</button>
+      </div>
+    </div>
 
     <!-- 工资设置 -->
     <section class="card settings-card">

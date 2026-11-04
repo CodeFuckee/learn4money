@@ -1,4 +1,9 @@
-/* 学习挣钱看板 — 深色主题 */
+/* 学习挣钱看板 — 基础样式 + 经典主题 tokens
+ *
+ * 架构：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（:root = 经典主题），
+ * Material / Apple / Fluent 三套设计语言主题由 themes.css 按 body[data-theme]
+ * 覆盖同名 tokens 实现，结构与交互只有一份。
+ */
 * {
   margin: 0;
   padding: 0;
@@ -6,21 +11,41 @@
 }
 
 :root {
+  /* 色彩（默认 = 经典风格） */
   --bg: #0f1220;
+  --bg-image: radial-gradient(1200px 800px at 70% -10%, #1a1f3a 0%, var(--bg) 55%);
   --card: rgba(255, 255, 255, 0.05);
   --card-border: rgba(255, 255, 255, 0.08);
   --text: #e8eaf2;
   --text-dim: #8a90a6;
-  --green: #34d399;
-  --green-glow: rgba(52, 211, 153, 0.35);
-  --red: #f87171;
+  --accent: #34d399;
+  --accent-contrast: #06281c;
+  --accent-glow: rgba(52, 211, 153, 0.35);
+  --running-border: rgba(52, 211, 153, 0.4);
+  --danger: #f87171;
+  --danger-bg: rgba(248, 113, 113, 0.15);
+  --danger-bg-hover: rgba(248, 113, 113, 0.25);
   --amber: #fbbf24;
+  --chip-bg: rgba(255, 255, 255, 0.06);
+  --item-bg: rgba(255, 255, 255, 0.04);
+  --btn2-bg: rgba(255, 255, 255, 0.1);
+  --btn2-bg-hover: rgba(255, 255, 255, 0.16);
+  /* 形状 */
+  --radius-card: 16px;
+  --radius-stat: 14px;
+  --radius-btn: 12px;
+  --radius-input: 10px;
+  --radius-sm: 8px;
+  /* 字体与阴影 */
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", sans-serif;
+  --shadow-card: none;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
-    "Segoe UI", sans-serif;
-  background: radial-gradient(1200px 800px at 70% -10%, #1a1f3a 0%, var(--bg) 55%);
+  font-family: var(--font);
+  background-color: var(--bg);
+  background-image: var(--bg-image);
   color: var(--text);
   min-height: 100vh;
 }
@@ -60,18 +85,64 @@ body {
 .ic {
   flex-shrink: 0;
 }
-.ic-title { width: 24px; height: 24px; color: var(--green); }
+.ic-title { width: 24px; height: 24px; color: var(--accent); }
 .ic-card  { width: 15px; height: 15px; color: var(--text-dim); }
 .ic-btn   { width: 16px; height: 16px; }
 .ic-sm    { width: 14px; height: 14px; color: var(--text-dim); }
 .ic-xs    { width: 12px; height: 12px; }
 
+/* ---------- 主题切换 ---------- */
+.theme-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.theme-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.theme-switch {
+  display: flex;
+  gap: 2px;
+  background: var(--chip-bg);
+  border-radius: var(--radius-input);
+  padding: 3px;
+}
+
+.theme-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 12.5px;
+  font-family: inherit;
+  padding: 6px 13px;
+  border-radius: calc(var(--radius-input) - 3px);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.theme-btn.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+}
+
+/* ---------- 卡片 ---------- */
 .card {
   background: var(--card);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: var(--radius-card);
   padding: 18px;
   backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
 }
 
 .card-title {
@@ -93,8 +164,8 @@ body {
 
 .mode-switch {
   display: flex;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
+  background: var(--chip-bg);
+  border-radius: var(--radius-input);
   padding: 3px;
   flex-shrink: 0;
 }
@@ -104,25 +175,27 @@ body {
   background: transparent;
   color: var(--text-dim);
   font-size: 14px;
+  font-family: inherit;
   padding: 7px 16px;
-  border-radius: 8px;
+  border-radius: calc(var(--radius-input) - 3px);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .mode-btn.active {
-  background: var(--green);
-  color: #06281c;
+  background: var(--accent);
+  color: var(--accent-contrast);
   font-weight: 600;
 }
 
 .wage-input-wrap {
   flex: 1;
+  min-width: 0; /* 必须显式归零：否则 number input 的固有宽度（随主题字体回退变化）会撑爆 flex 收缩 */
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
+  background: var(--chip-bg);
+  border-radius: var(--radius-input);
   padding: 8px 12px;
 }
 
@@ -142,6 +215,7 @@ body {
   font-size: 18px;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  font-family: inherit;
 }
 
 #wageInput:disabled {
@@ -158,12 +232,12 @@ body {
 .main-card {
   text-align: center;
   padding: 28px 18px 24px;
-  transition: box-shadow 0.4s;
+  transition: box-shadow 0.4s, border-color 0.4s;
 }
 
 .main-card.running {
-  box-shadow: 0 0 40px var(--green-glow);
-  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow: 0 0 40px var(--accent-glow);
+  border-color: var(--running-border);
 }
 
 .earned-label {
@@ -174,10 +248,10 @@ body {
 .earned-amount {
   font-size: 52px;
   font-weight: 700;
-  color: var(--green);
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
   margin: 6px 0 20px;
-  text-shadow: 0 0 24px var(--green-glow);
+  text-shadow: 0 0 24px var(--accent-glow);
 }
 
 .elapsed-label {
@@ -209,7 +283,7 @@ body {
 }
 
 .status-dot.running .dot {
-  background: var(--green);
+  background: var(--accent);
   animation: pulse 1.2s ease-in-out infinite;
 }
 
@@ -230,9 +304,10 @@ body {
 
 .btn {
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-btn);
   font-size: 15px;
   font-weight: 600;
+  font-family: inherit;
   padding: 12px 22px;
   cursor: pointer;
   transition: all 0.15s;
@@ -248,8 +323,8 @@ body {
 }
 
 .btn-primary {
-  background: var(--green);
-  color: #06281c;
+  background: var(--accent);
+  color: var(--accent-contrast);
   flex: 1;
   max-width: 160px;
 }
@@ -259,21 +334,21 @@ body {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--btn2-bg);
   color: var(--text);
 }
 
 .btn-secondary:not(:disabled):hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: var(--btn2-bg-hover);
 }
 
 .btn-danger {
-  background: rgba(248, 113, 113, 0.15);
-  color: var(--red);
+  background: var(--danger-bg);
+  color: var(--danger);
 }
 
 .btn-danger:not(:disabled):hover {
-  background: rgba(248, 113, 113, 0.25);
+  background: var(--danger-bg-hover);
 }
 
 /* ---------- 统计 ---------- */
@@ -286,9 +361,10 @@ body {
   flex: 1;
   background: var(--card);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: var(--radius-stat);
   padding: 14px 8px;
   text-align: center;
+  box-shadow: var(--shadow-card);
 }
 
 .stat-value {
@@ -318,18 +394,19 @@ body {
 .btn-link {
   border: none;
   background: transparent;
-  color: var(--red);
+  color: var(--danger);
   font-size: 12px;
+  font-family: inherit;
   cursor: pointer;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   gap: 5px;
 }
 
 .btn-link:hover {
-  background: rgba(248, 113, 113, 0.12);
+  background: var(--danger-bg);
 }
 
 .record-list {
@@ -347,8 +424,8 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 10px;
+  background: var(--item-bg);
+  border-radius: var(--radius-sm);
   padding: 10px 12px;
   font-size: 13px;
 }
@@ -365,7 +442,7 @@ body {
 }
 
 .record-earned {
-  color: var(--green);
+  color: var(--accent);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;

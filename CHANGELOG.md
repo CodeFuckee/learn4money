@@ -2,6 +2,24 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.2.0] - 2026-11-04
+
+### Added
+
+- 多设计语言主题：顶栏主题切换器（经典 / Material / Apple / Fluent），选择持久化到 localStorage，刷新保持。
+  - 经典 = 原深色绿光风格（默认），完整保留；
+  - Material：Material Design 3（Material You 深色）——surface 层次、24px 大圆角、pill 按钮、Roboto、elevation；
+  - Apple：iOS 深色分组样式——纯黑背景、#1C1C1E 分组卡片、systemGreen、胶囊按钮；
+  - Fluent：Windows 11 深色——#202020/#2B2B2B + 1px subtle stroke、4px 控件圆角、Segoe UI、accent 蓝。
+
+### Changed
+
+- 样式重构为 CSS design tokens 架构：全部颜色/圆角/字体/阴影收敛为 `styles.css` `:root` 变量；三套新主题经 `themes.css` 按 `body[data-theme]` 覆盖同名 tokens，结构与交互单份维护。
+
+### Fixed
+
+- Fluent 主题下工资输入框溢出卡片：number input 固有宽度随字体回退（Segoe UI→system-ui）变化，撑爆 `.wage-input-wrap` 的 automatic minimum size（flex `min-width:auto`）——补 `min-width: 0` 修复。
+
 ## [0.1.1] - 2026-11-04
 
 ### Changed

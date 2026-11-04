@@ -1,0 +1,99 @@
+/* 多设计语言主题 — body[data-theme] 覆盖同名 design tokens
+ *
+ * 结构与交互只有一份（styles.css），每个主题只声明自己的 token 值，
+ * 忠实还原各设计语言的标志性观感：
+ * - Material Design 3（Material You 深色）：#1C1B1F 系 surface 层次、
+ *   24px 大圆角卡片、pill 全圆按钮、Roboto、elevation 阴影、无描边
+ * - Apple（iOS 深色分组样式）：纯黑背景、#1C1C1E 分组卡片、systemGreen、
+ *   胶囊按钮、SF/PingFang、无阴影无描边的纯净分层
+ * - Fluent Design（Windows 11 深色）：#202020 背景、#2B2B2B 卡片 + 1px
+ *   subtle stroke、4px 控件圆角、Segoe UI、轻 elevation、系统 accent 蓝
+ * 强调色沿用各语言的官方色板（绿色种子/系统绿/默认 accent 蓝）。
+ */
+
+/* —— Material Design 3 · Material You 深色 —— */
+body[data-theme="material"] {
+  --bg: #141218;
+  --bg-image: none;
+  --card: #1d1b20;
+  --card-border: transparent;
+  --text: #e6e0e9;
+  --text-dim: #948f99;
+  --accent: #7fdca4;
+  --accent-contrast: #0e381f;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #f2b8b5;
+  --danger-bg: rgba(242, 184, 181, 0.12);
+  --danger-bg-hover: rgba(242, 184, 181, 0.24);
+  --chip-bg: #2b2930;
+  --item-bg: #211f26;
+  --btn2-bg: #2b2930;
+  --btn2-bg-hover: #36343b;
+  --radius-card: 24px;
+  --radius-stat: 20px;
+  --radius-btn: 999px;
+  --radius-input: 14px;
+  --radius-sm: 12px;
+  --font: "Roboto", "Google Sans", "Noto Sans SC", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* —— Apple · iOS 深色分组样式 —— */
+body[data-theme="apple"] {
+  --bg: #000000;
+  --bg-image: none;
+  --card: #1c1c1e;
+  --card-border: transparent;
+  --text: #f2f2f7;
+  --text-dim: #8e8e93;
+  --accent: #30d158;
+  --accent-contrast: #ffffff;
+  --accent-glow: transparent;
+  --running-border: transparent;
+  --danger: #ff453a;
+  --danger-bg: rgba(255, 69, 58, 0.15);
+  --danger-bg-hover: rgba(255, 69, 58, 0.28);
+  --chip-bg: #2c2c2e;
+  --item-bg: #2c2c2e;
+  --btn2-bg: #2c2c2e;
+  --btn2-bg-hover: #3a3a3c;
+  --radius-card: 18px;
+  --radius-stat: 16px;
+  --radius-btn: 999px;
+  --radius-input: 12px;
+  --radius-sm: 10px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+    "Helvetica Neue", sans-serif;
+  --shadow-card: none;
+}
+
+/* —— Fluent Design · Windows 11 深色 —— */
+body[data-theme="fluent"] {
+  --bg: #202020;
+  --bg-image: none;
+  --card: #2b2b2b;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --text-dim: #9d9d9d;
+  --accent: #4cc2ff;
+  --accent-contrast: #002a3f;
+  --accent-glow: transparent;
+  --running-border: rgba(76, 194, 255, 0.5);
+  --danger: #ff99a4;
+  --danger-bg: rgba(255, 153, 164, 0.12);
+  --danger-bg-hover: rgba(255, 153, 164, 0.22);
+  --chip-bg: #323232;
+  --item-bg: #303030;
+  --btn2-bg: #373737;
+  --btn2-bg-hover: #404040;
+  --radius-card: 8px;
+  --radius-stat: 8px;
+  --radius-btn: 4px;
+  --radius-input: 4px;
+  --radius-sm: 4px;
+  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, "Microsoft YaHei",
+    sans-serif;
+  --shadow-card: 0 2px 4px rgba(0, 0, 0, 0.28);
+}

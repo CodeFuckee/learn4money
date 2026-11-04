@@ -12,6 +12,11 @@
 - **统计**：今日收入、今日学习时长、累计收入（含进行中的会话）。
 - **学习记录**：最近的会话列表（时间、时长、金额），可一键清空。
 - **刷新不丢**：设置、进行中的会话、历史记录均存 localStorage；计时基于时间戳重算，页面刷新或电脑休眠后金额依然准确。
+- **四套设计语言主题**（顶栏切换，选择持久化）：
+  - **经典**——深色绿光、毛玻璃卡片（默认）；
+  - **Material**——Material Design 3 / Material You 深色：surface 层次、24px 大圆角、pill 全圆按钮、Roboto、elevation 阴影；
+  - **Apple**——iOS 深色分组样式：纯黑背景、`#1C1C1E` 分组卡片、systemGreen、胶囊按钮；
+  - **Fluent**——Windows 11 深色：`#202020`/`#2B2B2B` + 1px subtle stroke、4px 控件圆角、Segoe UI、系统 accent 蓝。
 - 不足 5 秒的会话视为误触，不入记录。
 
 ## 运行
@@ -30,5 +35,6 @@ python3 -m http.server 8765 --bind 0.0.0.0
 ## 技术说明
 
 - 原生 HTML/CSS/JS 单页应用。
+- **主题架构**：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（`styles.css` 的 `:root` = 经典主题）；Material / Apple / Fluent 由 `themes.css` 按 `body[data-theme]` 覆盖同名 tokens 实现——结构与交互只有一份，皮肤只有声明。
 - 图标统一使用 [Lucide](https://lucide.dev)（ISC 许可），库文件内置在 `vendor/lucide.min.js`，无任何运行时 CDN/网络请求，离线可用；库加载失败时页面功能不受影响（仅无图标）。
 - 金额 = 已学秒数 × (时薪 ÷ 3600)，每帧从 `Date.now() - startTs - 暂停累计` 重算，不使用累加器，避免计时漂移。
