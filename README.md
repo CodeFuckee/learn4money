@@ -12,9 +12,9 @@
 - **统计**：今日收入、今日学习时长、累计收入（含进行中的会话）。
 - **学习记录**：最近的会话列表（时间、时长、金额），可一键清空。
 - **刷新不丢**：设置、进行中的会话、历史记录均存 localStorage；计时基于时间戳重算，页面刷新或电脑休眠后金额依然准确。
-- **八套主题**（4 设计语言 × 深/浅，顶栏切换、偏好持久化）：
+- **八套主题**（4 设计语言 × 深/浅，顶栏切换、偏好持久化），**强调色统一为蓝色系**（各语言官方蓝）：
   - **经典**——深色绿光毛玻璃（默认）/ 浅灰蓝白卡浅色；
-  - **Material**——Material Design 3（Material You）：深 `#141218` / 浅 `#fef7ff`，24px 大圆角、pill 按钮、Roboto、elevation；
+  - **Material**——由 **Vuetify 3**（Material Design 3 规范组件库）原生实现：深 `#141218` / 浅 `#fef7ff`，pill 按钮、elevation；
   - **Apple**——iOS 分组样式：深纯黑 / 浅 `#f2f2f7`，systemGreen、胶囊按钮；
   - **Fluent**——Windows 11：深 `#202020` / 浅 `#f3f3f3`，1px subtle stroke、4px 控件圆角、Segoe UI、accent 蓝。
 - 不足 5 秒的会话视为误触，不入记录。
@@ -34,7 +34,8 @@ npm run preview    # 预览构建产物（0.0.0.0:4173）
 
 ## 技术栈与架构
 
-- **Vue 3.5**（`<script setup lang="ts">` 组合式 API）+ **TypeScript strict** + **Vite 7**。
+- **Vue 3.5**（`<script setup lang="ts">` 组合式 API）+ **TypeScript strict** + **Vite 7** + **Vuetify 3**（Material Design 组件库，v-card/v-btn/v-text-field/v-btn-toggle/v-list/v-dialog）。
+- 主题色板单一事实源 `src/lib/palette.ts`：8 套主题（`classic-dark` 等 8 名）同步驱动 Vuetify 命名主题与 `body[data-theme]` CSS 层。
 - 组件：`src/components/`（ThemeSwitcher / WageSettings / TimerCard / StatsRow / RecordList）。
 - 核心逻辑：`src/composables/useTimer.ts`（计时状态机模块级单例）、`useTheme.ts`（主题偏好）；纯函数在 `src/lib/`（types / storage / format / wage）。
 - **主题架构**：全部颜色/圆角/字体/阴影收敛为 CSS design tokens（`src/styles/base.css` 的 `:root` = 经典深色）；其余 7 套主题经 `src/styles/themes.css` 按 `body[data-theme]` 覆盖同名 tokens——结构与交互只有一份，换肤纯声明式。

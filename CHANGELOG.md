@@ -2,6 +2,19 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.4.0] - 2026-11-04
+
+### Added
+
+- 接入 **Vuetify 3.13**（Material Design 3 规范组件库）：Material 风格由组件库原生实现，自绘按钮/卡片/输入框/列表全部替换为 v-card / v-btn / v-text-field / v-btn-toggle / v-list / v-dialog；清空确认改用 v-dialog。
+- 全部 8 套主题强调色统一为蓝色系（各设计语言官方蓝）：经典 `#60a5fa`/`#2563eb`、Material `#a5c8ff`/`#0061a4`、Apple `#0a84ff`/`#007aff`、Fluent `#4cc2ff`/`#005fb8`。
+- 新增 `src/lib/palette.ts` 作为色板单一事实源；深色主题名补 `-dark` 后缀（`classic-dark` 等 8 名统一）。
+
+### Fixed
+
+- v-card 默认 padding 被 Vuetify 样式覆盖致内容贴边（双类名提权重修复）。
+- v-btn 继承 M2 uppercase 遗产致主题按钮全大写；按钮内图标与文字无间距。
+
 ## [0.3.0] - 2026-11-04
 
 ### Added
