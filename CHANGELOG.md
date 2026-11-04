@@ -2,6 +2,12 @@
 
 本项目的所有重要变更记录在此文件。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)。
 
+## [0.5.1] - 2026-11-04
+
+### Changed
+
+- 「本次已挣」金额从 4 位小数改为 2 位小数（到分），两棵组件树（Carbon / Vuetify）同步。
+
 ## [0.5.0] - 2026-11-04
 
 ### Added

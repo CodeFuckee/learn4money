@@ -18,7 +18,7 @@ const primaryDisabled = computed(() => isRunning.value);
 <template>
   <v-card class="main-card card-el" :class="{ running: isRunning }">
     <div class="earned-label">本次已挣</div>
-    <div class="earned-amount" id="earnedAmount">¥{{ earned.toFixed(4) }}</div>
+    <div class="earned-amount" id="earnedAmount">¥{{ earned.toFixed(2) }}</div>
     <div class="elapsed-label">已学习时长</div>
     <div class="elapsed-time" id="elapsedTime">{{ fmtDuration(elapsedSeconds) }}</div>
     <div class="status-dot" :class="{ running: isRunning, paused: isPaused }">
