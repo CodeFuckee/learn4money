@@ -16,7 +16,9 @@
 
 ## 运行
 
-纯静态页面，无依赖、无构建：
+**在线访问**（GitHub Pages）：https://codefuckee.github.io/learn4money/
+
+本地运行，纯静态页面，无依赖、无构建：
 
 ```bash
 python3 -m http.server 8765 --bind 0.0.0.0
