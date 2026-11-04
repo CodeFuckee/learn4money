@@ -48,13 +48,13 @@ export const THEME_NAMES: ThemeName[] = [
 ];
 
 export const PALETTES: Record<ThemeName, ThemePalette> = {
-  /* 经典：深色电光蓝 / 浅色 blue-600 */
+  /* 经典：IBM Carbon 官方蓝（g100 interactive #4589ff / blue-60 #0f62fe） */
   "classic-dark": {
     dark: true,
     background: "#0f1220",
     surface: "#181d2f",
-    primary: "#60a5fa",
-    onPrimary: "#0b1c3d",
+    primary: "#4589ff",
+    onPrimary: "#ffffff",
     onSurface: "#e8eaf2",
     onSurfaceVariant: "#8a90a6",
     error: "#f87171",
@@ -63,7 +63,7 @@ export const PALETTES: Record<ThemeName, ThemePalette> = {
     dark: false,
     background: "#f2f4fa",
     surface: "#ffffff",
-    primary: "#2563eb",
+    primary: "#0f62fe",
     onPrimary: "#ffffff",
     onSurface: "#1e2438",
     onSurfaceVariant: "#6b7288",

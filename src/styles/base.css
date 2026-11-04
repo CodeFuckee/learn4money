@@ -83,6 +83,34 @@ body {
   background: var(--chip-bg);
 }
 
+/* ---------- Carbon（经典主题）适配 ---------- */
+/* CvButton 的 default slot 直接纳图标+文字，需要自行排版 */
+body[data-theme^="classic"] .bx--btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mode-switch.carbon {
+  display: flex;
+  gap: 8px;
+  background: transparent;
+  padding: 0;
+}
+/* Carbon 按钮默认较宽，切换器内紧凑化保持同行 */
+.theme-switch.carbon .bx--btn,
+#themeModeToggle.bx--btn {
+  min-width: 0;
+  padding: 6px 14px;
+}
+/* CvModal footer：插槽自定义按钮与 Carbon 内置 footer 布局对齐 */
+.bx--modal .bx--modal-footer .bx--btn {
+  flex: 1;
+  max-width: none;
+  min-width: 0;
+  justify-content: center;
+}
+
 /* 记录列表嵌在卡片内，透出卡片底色 */
 .record-list.v-list {
   background: transparent;

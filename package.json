@@ -11,6 +11,9 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@carbon/styles": "^1.118.0",
+    "@carbon/vue": "^3.0.32",
+    "carbon-components": "^11.66.1",
     "lucide-vue-next": "^0.548.0",
     "sass": "^1.107.1",
     "vite-plugin-vuetify": "^2.1.3",

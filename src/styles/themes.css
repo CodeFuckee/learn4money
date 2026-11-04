@@ -16,10 +16,10 @@ body[data-theme="classic-dark"] {
   --card-border: rgba(255, 255, 255, 0.08);
   --text: #e8eaf2;
   --text-dim: #8a90a6;
-  --accent: #60a5fa;
-  --accent-contrast: #0b1c3d;
-  --accent-glow: rgba(96, 165, 250, 0.35);
-  --running-border: rgba(96, 165, 250, 0.4);
+  --accent: #4589ff;
+  --accent-contrast: #ffffff;
+  --accent-glow: rgba(69, 137, 255, 0.35);
+  --running-border: rgba(69, 137, 255, 0.4);
   --danger: #f87171;
   --danger-bg: rgba(248, 113, 113, 0.15);
   --danger-bg-hover: rgba(248, 113, 113, 0.25);
@@ -42,10 +42,10 @@ body[data-theme="classic-light"] {
   --card-border: rgba(15, 23, 42, 0.08);
   --text: #1e2438;
   --text-dim: #6b7288;
-  --accent: #2563eb;
+  --accent: #0f62fe;
   --accent-contrast: #ffffff;
-  --accent-glow: rgba(37, 99, 235, 0.22);
-  --running-border: rgba(37, 99, 235, 0.45);
+  --accent-glow: rgba(15, 98, 254, 0.22);
+  --running-border: rgba(15, 98, 254, 0.45);
   --danger: #dc2626;
   --danger-bg: rgba(220, 38, 38, 0.1);
   --danger-bg-hover: rgba(220, 38, 38, 0.18);
@@ -75,6 +75,89 @@ body[data-theme="classic-light"] .v-btn {
 body[data-theme="classic-dark"] .v-field,
 body[data-theme="classic-light"] .v-field {
   border-radius: var(--radius-input);
+}
+
+/* 经典：Carbon design tokens（官方 g100/g10 色板值，供 @carbon/vue 组件使用）+ IBM Plex 字体 */
+body[data-theme="classic-dark"] {
+  --cds-background: #161616;
+  --cds-layer: #262626;
+  --cds-layer-hover: #333333;
+  --cds-field: #262626;
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-on-color: #ffffff;
+  --cds-interactive: #4589ff;
+  --cds-link-primary: #4589ff;
+  --cds-border-subtle: #393939;
+  --cds-border-strong: #8d8d8d;
+  --cds-focus: #6ea6ff;
+  --cds-button-primary: #4589ff;
+  --cds-button-primary-hover: #5b9dff;
+  --cds-button-secondary: #393939;
+  --cds-button-secondary-hover: #4c4c4c;
+  --cds-button-tertiary: #4589ff;
+  --cds-button-tertiary-hover: #5b9dff;
+  --cds-button-danger: #4589ff;
+  --cds-button-danger-hover: #5b9dff;
+  --cds-button-disabled: #525252;
+  --cds-icon-primary: #4589ff;
+  --cds-overlay: rgba(0, 0, 0, 0.65);
+  --font: "IBM Plex Sans", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+/* 经典：Carbon 组件树容器与记录列表布局 */
+body[data-theme^="classic"] .carbon-card {
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  padding: 18px;
+}
+body[data-theme^="classic"] .record-list.bx--list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body[data-theme^="classic"] .record-list .record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: var(--item-bg);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+body[data-theme^="classic"] .record-list .record-detail {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--text);
+}
+
+body[data-theme="classic-light"] {
+  --cds-background: #f4f4f4;
+  --cds-layer: #ffffff;
+  --cds-layer-hover: #e8e8e8;
+  --cds-field: #f4f4f4;
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-on-color: #ffffff;
+  --cds-interactive: #0f62fe;
+  --cds-link-primary: #0f62fe;
+  --cds-border-subtle: #c6c6c6;
+  --cds-border-strong: #8d8d8d;
+  --cds-focus: #0f62fe;
+  --cds-button-primary: #0f62fe;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-secondary: #ffffff;
+  --cds-button-secondary-hover: #e8e8e8;
+  --cds-button-tertiary: #0f62fe;
+  --cds-button-tertiary-hover: #0353e9;
+  --cds-button-danger: #0f62fe;
+  --cds-button-danger-hover: #0353e9;
+  --cds-icon-primary: #0f62fe;
+  --cds-overlay: rgba(0, 0, 0, 0.5);
+  --font: "IBM Plex Sans", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 /* ==================== Material Design 3 ==================== */
