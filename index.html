@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习挣钱看板</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>📚 学习挣钱</h1>
+      <p class="subtitle">学一分钟，挣一分钟的钱</p>
+    </header>
+
+    <!-- 工资设置 -->
+    <section class="card settings-card">
+      <div class="card-title">⚙️ 工资设置</div>
+      <div class="settings-row">
+        <div class="mode-switch" id="modeSwitch" role="radiogroup">
+          <button class="mode-btn active" data-mode="monthly" id="modeMonthly">月薪</button>
+          <button class="mode-btn" data-mode="hourly" id="modeHourly">时薪</button>
+        </div>
+        <div class="wage-input-wrap">
+          <span class="wage-unit" id="wageUnit">元/月</span>
+          <input type="number" id="wageInput" min="0" step="100" placeholder="如 20000">
+        </div>
+      </div>
+      <div class="rate-hint" id="rateHint">折算时薪：— 元/小时 · 每秒收入：— 元</div>
+    </section>
+
+    <!-- 主看板 -->
+    <section class="card main-card" id="mainCard">
+      <div class="earned-label">本次已挣</div>
+      <div class="earned-amount" id="earnedAmount">¥0.0000</div>
+      <div class="elapsed-label">已学习时长</div>
+      <div class="elapsed-time" id="elapsedTime">00:00:00</div>
+      <div class="status-dot" id="statusDot"><span class="dot"></span><span id="statusText">待开始</span></div>
+      <div class="controls">
+        <button class="btn btn-primary" id="startBtn">开始学习</button>
+        <button class="btn btn-secondary" id="pauseBtn" disabled>暂停</button>
+        <button class="btn btn-danger" id="stopBtn" disabled>结束</button>
+      </div>
+    </section>
+
+    <!-- 统计 -->
+    <section class="stats-row">
+      <div class="stat">
+        <div class="stat-value" id="todayEarned">¥0.00</div>
+        <div class="stat-label">今日收入</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="todayDuration">0 分钟</div>
+        <div class="stat-label">今日学习</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="totalEarned">¥0.00</div>
+        <div class="stat-label">累计收入</div>
+      </div>
+    </section>
+
+    <!-- 历史记录 -->
+    <section class="card history-card">
+      <div class="history-header">
+        <div class="card-title">📋 学习记录</div>
+        <button class="btn-link" id="clearBtn">清空</button>
+      </div>
+      <ul class="record-list" id="recordList"></ul>
+      <div class="empty-hint" id="emptyHint">还没有记录，点击「开始学习」赚第一笔吧 🚀</div>
+    </section>
+
+    <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

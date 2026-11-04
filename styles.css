@@ -1,0 +1,381 @@
+/* 学习挣钱看板 — 深色主题 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f1220;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text: #e8eaf2;
+  --text-dim: #8a90a6;
+  --green: #34d399;
+  --green-glow: rgba(52, 211, 153, 0.35);
+  --red: #f87171;
+  --amber: #fbbf24;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", sans-serif;
+  background: radial-gradient(1200px 800px at 70% -10%, #1a1f3a 0%, var(--bg) 55%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.page-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 18px;
+  backdrop-filter: blur(8px);
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+/* ---------- 工资设置 ---------- */
+.settings-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mode-switch {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-dim);
+  font-size: 14px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.mode-btn.active {
+  background: var(--green);
+  color: #06281c;
+  font-weight: 600;
+}
+
+.wage-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.wage-unit {
+  color: var(--text-dim);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+#wageInput {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+#wageInput:disabled {
+  opacity: 0.5;
+}
+
+.rate-hint {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ---------- 主看板 ---------- */
+.main-card {
+  text-align: center;
+  padding: 28px 18px 24px;
+  transition: box-shadow 0.4s;
+}
+
+.main-card.running {
+  box-shadow: 0 0 40px var(--green-glow);
+  border-color: rgba(52, 211, 153, 0.4);
+}
+
+.earned-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.earned-amount {
+  font-size: 52px;
+  font-weight: 700;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+  margin: 6px 0 20px;
+  text-shadow: 0 0 24px var(--green-glow);
+}
+
+.elapsed-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.elapsed-time {
+  font-size: 30px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+
+.status-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 14px 0 18px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.status-dot .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+
+.status-dot.running .dot {
+  background: var(--green);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.status-dot.paused .dot {
+  background: var(--amber);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #06281c;
+  flex: 1;
+  max-width: 160px;
+}
+
+.btn-primary:not(:disabled):hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+.btn-secondary:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.btn-danger {
+  background: rgba(248, 113, 113, 0.15);
+  color: var(--red);
+}
+
+.btn-danger:not(:disabled):hover {
+  background: rgba(248, 113, 113, 0.25);
+}
+
+/* ---------- 统计 ---------- */
+.stats-row {
+  display: flex;
+  gap: 12px;
+}
+
+.stat {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 14px 8px;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.stat-label {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ---------- 历史记录 ---------- */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-header .card-title {
+  margin-bottom: 0;
+}
+
+.btn-link {
+  border: none;
+  background: transparent;
+  color: var(--red);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.btn-link:hover {
+  background: rgba(248, 113, 113, 0.12);
+}
+
+.record-list {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.record-time {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.record-detail {
+  flex: 1;
+  text-align: center;
+  color: var(--text);
+}
+
+.record-earned {
+  color: var(--green);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.empty-hint {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 12px 0;
+}
+
+.page-footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 8px;
+}
+
+/* 手机适配 */
+@media (max-width: 420px) {
+  .earned-amount {
+    font-size: 42px;
+  }
+  .stats-row {
+    flex-direction: column;
+  }
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+  }
+  .stat-label {
+    margin-top: 0;
+  }
+}
