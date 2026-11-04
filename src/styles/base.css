@@ -103,6 +103,19 @@ body[data-theme^="classic"] .bx--btn {
   min-width: 0;
   padding: 6px 14px;
 }
+/* 经典主题：secondary 按钮文字色走 text-on-color（浅色主题下是白色），
+ * 白底白字不可读——改用主题文字色 */
+body[data-theme^="classic"] .bx--btn--secondary,
+body[data-theme^="classic"] .bx--btn--secondary:hover,
+body[data-theme^="classic"] .bx--btn--secondary:focus {
+  color: var(--text);
+}
+/* 禁用态按钮（如未开始时的「继续」）文字提亮到次级文字色，避免灰底灰字 */
+body[data-theme^="classic"] .bx--btn--disabled,
+body[data-theme^="classic"] .bx--btn:disabled {
+  color: var(--text-dim);
+}
+
 /* CvModal footer：插槽自定义按钮与 Carbon 内置 footer 布局对齐 */
 .bx--modal .bx--modal-footer .bx--btn {
   flex: 1;
