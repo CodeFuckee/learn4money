@@ -21,7 +21,7 @@ function doClear(): void {
 </script>
 
 <template>
-  <section class="card-el carbon-card">
+  <section class="card-el carbon-card history-card">
     <div class="history-header">
       <div class="card-title"><ClipboardList class="ic ic-card" />学习记录</div>
       <CvButton id="clearBtn" size="small" kind="danger--ghost" :disabled="records.length === 0" @click="onClear">

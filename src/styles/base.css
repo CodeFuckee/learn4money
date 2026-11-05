@@ -196,11 +196,69 @@ body[data-theme^="classic"] .bx--btn:disabled {
     position: sticky;
     top: 24px;
   }
-  .earned-amount {
-    font-size: 64px;
+}
+
+/* ---------- 大屏模式（≥1280）：垂直撑满视口，金钱跳动主角化 ---------- */
+@media (min-width: 1280px) {
+  .page {
+    max-width: 1400px;
+    min-height: calc(100vh - 80px); /* 上下 padding 合计 */
   }
-  .elapsed-time {
-    font-size: 36px;
+  .content-grid {
+    flex: 1;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    align-items: stretch;
+  }
+  .col-main {
+    position: static;
+  }
+  .main-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 32px !important;
+  }
+  /* 记录卡片撑满右栏剩余高度，列表内部滚动 */
+  .col-side .history-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-side .history-card .record-list {
+    flex: 1;
+    max-height: none;
+  }
+  /* flex 列布局下状态点保持水平居中 */
+  .main-card .status-dot {
+    align-self: center;
+  }
+}
+
+/* ---------- 金钱跳动 ---------- */
+@keyframes earned-pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.earned-amount.bump {
+  animation: earned-pop 0.32s cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+
+/* 运行中光晕呼吸（经典主题发光色显著，其余主题 token 为透明即无感） */
+@keyframes glow-breath {
+  0%, 100% { box-shadow: 0 0 22px var(--accent-glow); }
+  50% { box-shadow: 0 0 60px var(--accent-glow); }
+}
+.main-card.running {
+  animation: glow-breath 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .earned-amount.bump,
+  .main-card.running,
+  .status-dot.running .dot {
+    animation: none;
   }
 }
 
@@ -345,6 +403,19 @@ body[data-theme^="classic"] .bx--btn:disabled {
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* 响应式字号：必须位于 .earned-amount/.elapsed-time 基础规则之后（同权重后定义者胜） */
+@media (min-width: 960px) {
+  .earned-amount { font-size: 64px; }
+  .elapsed-time { font-size: 36px; }
+}
+@media (min-width: 1280px) {
+  .earned-amount {
+    font-size: clamp(88px, 10vw, 150px);
+    line-height: 1.05;
+  }
+  .elapsed-time { font-size: 44px; }
 }
 
 .controls {

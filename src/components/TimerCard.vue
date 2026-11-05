@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { Pause, Play, Square } from "lucide-vue-next";
 import { useTimer } from "../composables/useTimer";
+import { useEarnedBump } from "../composables/useEarnedBump";
 import { fmtDuration } from "../lib/format";
 
 const { session, earned, elapsedSeconds, togglePrimary, pause, stop } = useTimer();
+
+const earnedEl = ref<HTMLElement>();
+useEarnedBump(earned, earnedEl);
 
 const isRunning = computed(() => !!session.value && !session.value.paused);
 const isPaused = computed(() => !!session.value?.paused);
@@ -18,7 +22,7 @@ const primaryDisabled = computed(() => isRunning.value);
 <template>
   <v-card class="main-card card-el" :class="{ running: isRunning }">
     <div class="earned-label">本次已挣</div>
-    <div class="earned-amount" id="earnedAmount">¥{{ earned.toFixed(2) }}</div>
+    <div class="earned-amount" id="earnedAmount" ref="earnedEl">¥{{ earned.toFixed(2) }}</div>
     <div class="elapsed-label">已学习时长</div>
     <div class="elapsed-time" id="elapsedTime">{{ fmtDuration(elapsedSeconds) }}</div>
     <div class="status-dot" :class="{ running: isRunning, paused: isPaused }">
