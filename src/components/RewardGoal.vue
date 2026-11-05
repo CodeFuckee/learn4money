@@ -1,7 +1,6 @@
 <script setup lang="ts">
-/** 激励目标卡片：大图标徽章 + 目标文案 + 进度条（纯展示，跨组件树共用） */
+/** 激励目标卡片：emoji 大徽章 + 目标文案 + 进度条（纯展示，跨组件树共用） */
 import { computed, watch, ref } from "vue";
-import { Target } from "lucide-vue-next";
 import { useReward } from "../composables/useReward";
 
 const { currentGoal, goalProgressRatio, achievedCount, totalGoals, totalEarned } = useReward();
@@ -29,8 +28,8 @@ watch(currentGoal, () => {
 <template>
   <div class="reward-goal">
     <div class="reward-main">
-      <div ref="badgeEl" class="reward-badge" :key="currentGoal?.name">
-        <component :is="currentGoal?.icon ?? Target" class="reward-icon" />
+      <div ref="badgeEl" class="reward-badge" :key="currentGoal?.icon">
+        <span class="reward-emoji">{{ currentGoal?.icon ?? "🎁" }}</span>
       </div>
       <div class="reward-info">
         <div class="reward-line">
