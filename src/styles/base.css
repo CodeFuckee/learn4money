@@ -292,7 +292,7 @@ body[data-theme^="classic"] .bx--btn:disabled {
   padding: 10px 0 0;
 }
 .bigscreen .stats-row {
-  gap: 40px;
+  gap: 56px;
 }
 .bigscreen .stat {
   background: none !important;
@@ -301,15 +301,55 @@ body[data-theme^="classic"] .bx--btn:disabled {
   padding: 0 !important;
   display: flex;
   align-items: baseline;
-  gap: 7px;
+  gap: 8px;
   border-radius: 0;
 }
 .bigscreen .stat-value {
-  font-size: 16px;
+  font-size: 19px;
+  color: var(--text);
 }
 .bigscreen .stat-label {
-  font-size: 12px;
+  font-size: 12.5px;
   margin: 0;
+}
+.bs-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 4px;
+}
+.bs-recent {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.bs-recent-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  background: var(--chip-bg);
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+}
+.bs-recent-time {
+  color: var(--text-dim);
+}
+.bs-recent-dur {
+  color: var(--text);
+}
+.bs-recent-earned {
+  color: var(--accent);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.bs-recent-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  opacity: 0.75;
 }
 .bs-dialog-body {
   display: flex;

@@ -10,6 +10,7 @@ import CarbonThemeSwitcher from "./CarbonThemeSwitcher.vue";
 import CarbonWageSettings from "./CarbonWageSettings.vue";
 import CarbonTimerCard from "./CarbonTimerCard.vue";
 import CarbonStatsRow from "./CarbonStatsRow.vue";
+import BigScreenRecent from "../BigScreenRecent.vue";
 import CarbonRecordList from "./CarbonRecordList.vue";
 
 const { themeLang } = useTheme();
@@ -42,8 +43,9 @@ const settingsOpen = ref(false);
     <main class="bs-center">
       <CarbonTimerCard />
     </main>
-    <footer class="bs-stats-row">
+    <footer class="bs-footer">
       <CarbonStatsRow />
+      <BigScreenRecent />
     </footer>
     <CvModal
       :visible="settingsOpen"

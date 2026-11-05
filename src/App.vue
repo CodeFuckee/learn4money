@@ -8,6 +8,7 @@ import ThemeSwitcher from "./components/ThemeSwitcher.vue";
 import WageSettings from "./components/WageSettings.vue";
 import TimerCard from "./components/TimerCard.vue";
 import StatsRow from "./components/StatsRow.vue";
+import BigScreenRecent from "./components/BigScreenRecent.vue";
 import RecordList from "./components/RecordList.vue";
 import { Settings } from "lucide-vue-next";
 
@@ -47,8 +48,9 @@ const settingsOpen = ref(false);
         <main class="bs-center">
           <TimerCard />
         </main>
-        <footer class="bs-stats-row">
+        <footer class="bs-footer">
           <StatsRow />
+          <BigScreenRecent />
         </footer>
         <v-dialog v-model="settingsOpen" max-width="720">
           <v-card class="card-el dialog-el">
