@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { Wallet } from "lucide-vue-next";
 import { useTimer } from "../composables/useTimer";
+import GenderPicker from "./GenderPicker.vue";
 
 const { settings, hourlyWage, perSecond, session } = useTimer();
 
@@ -62,5 +63,6 @@ function onWage(v: string | number): void {
       <span class="wage-unit">{{ settings.mode === "monthly" ? "元/月" : "元/小时" }}</span>
     </div>
     <div class="rate-hint" id="rateHint">{{ rateHint }}</div>
+    <GenderPicker />
   </v-card>
 </template>

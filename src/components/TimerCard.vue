@@ -4,6 +4,7 @@ import { Pause, Play, Square } from "lucide-vue-next";
 import { useTimer } from "../composables/useTimer";
 import { useEarnedBump } from "../composables/useEarnedBump";
 import { fmtDuration } from "../lib/format";
+import RewardGoal from "./RewardGoal.vue";
 
 const { session, earned, elapsedSeconds, togglePrimary, pause, stop } = useTimer();
 
@@ -25,6 +26,7 @@ const primaryDisabled = computed(() => isRunning.value);
     <div class="earned-amount" id="earnedAmount" ref="earnedEl">¥{{ earned.toFixed(2) }}</div>
     <div class="elapsed-label">已学习时长</div>
     <div class="elapsed-time" id="elapsedTime">{{ fmtDuration(elapsedSeconds) }}</div>
+    <RewardGoal />
     <div class="status-dot" :class="{ running: isRunning, paused: isPaused }">
       <span class="dot"></span><span id="statusText">{{ statusText }}</span>
     </div>
