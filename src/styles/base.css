@@ -134,11 +134,13 @@ body[data-theme^="classic"] .bx--btn:disabled {
   color: var(--text-dim);
 }
 
-/* CvModal footer：插槽自定义按钮与 Carbon 内置 footer 布局对齐 */
+/* CvModal footer：插槽自定义按钮与 Carbon 内置 footer 布局对齐
+ * （Carbon footer 按钮自带负 margin 叠加，插槽按钮需归零防溢出） */
 .bx--modal .bx--modal-footer .bx--btn {
   flex: 1;
   max-width: none;
   min-width: 0;
+  margin: 0;
   justify-content: center;
 }
 
@@ -198,41 +200,119 @@ body[data-theme^="classic"] .bx--btn:disabled {
   }
 }
 
-/* ---------- 大屏模式（≥1280）：垂直撑满视口，金钱跳动主角化 ---------- */
-@media (min-width: 1280px) {
-  .page {
-    max-width: 1400px;
-    min-height: calc(100vh - 80px); /* 上下 padding 合计 */
-  }
-  .content-grid {
-    flex: 1;
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    align-items: stretch;
-  }
-  .col-main {
-    position: static;
-  }
-  .main-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 48px 32px !important;
-  }
-  /* 记录卡片撑满右栏剩余高度，列表内部滚动 */
-  .col-side .history-card {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .col-side .history-card .record-list {
-    flex: 1;
-    max-height: none;
-  }
-  /* flex 列布局下状态点保持水平居中 */
-  .main-card .status-dot {
-    align-self: center;
-  }
+/* ---------- 大屏模式（≥1280）：极简全屏时钟式，金额巨字正中央 ---------- */
+.bigscreen {
+  max-width: none;
+  min-height: 100vh;
+  padding: 18px 28px 20px;
+}
+.bs-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.bigscreen .page-header {
+  flex: 1;
+  text-align: left;
+  margin: 0;
+}
+.bigscreen .page-header h1 {
+  font-size: 17px;
+  justify-content: flex-start;
+  gap: 7px;
+}
+.bigscreen .page-header .ic-title {
+  width: 18px;
+  height: 18px;
+}
+.bigscreen .page-header .subtitle {
+  margin-top: 1px;
+  font-size: 12px;
+}
+.bs-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bs-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 0;
+}
+/* 主看板去卡片壳，金额成为全屏主角 */
+.bs-center .main-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+  padding: 0 !important;
+  height: auto;
+}
+.bs-center .main-card.running {
+  animation: none;
+}
+.bs-center .carbon-card {
+  border: none !important;
+  background: none !important;
+  backdrop-filter: none !important;
+}
+.bigscreen .earned-label {
+  font-size: 16px;
+  letter-spacing: 6px;
+}
+.bigscreen .earned-amount {
+  font-size: clamp(96px, 17vw, 320px);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.bigscreen .elapsed-label {
+  font-size: 14px;
+  margin-top: 18px;
+}
+.bigscreen .elapsed-time {
+  font-size: clamp(48px, 5vw, 84px);
+}
+.bigscreen .controls {
+  margin-top: 26px;
+}
+.bigscreen .controls .v-btn,
+.bigscreen .controls .bx--btn {
+  padding: 14px 26px;
+  font-size: 16px;
+}
+.bs-stats-row {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 0;
+}
+.bigscreen .stats-row {
+  gap: 40px;
+}
+.bigscreen .stat {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  border-radius: 0;
+}
+.bigscreen .stat-value {
+  font-size: 16px;
+}
+.bigscreen .stat-label {
+  font-size: 12px;
+  margin: 0;
+}
+.bs-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 /* ---------- 金钱跳动 ---------- */
