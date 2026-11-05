@@ -284,6 +284,7 @@ body[data-theme^="classic"] .bx--btn:disabled {
 }
 .bigscreen .stats-row {
   gap: 56px;
+  flex-wrap: nowrap;
 }
 .bigscreen .stat {
   background: none !important;
@@ -294,6 +295,8 @@ body[data-theme^="classic"] .bx--btn:disabled {
   align-items: baseline;
   gap: 8px;
   border-radius: 0;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .bigscreen .stat-value {
   font-size: 19px;
