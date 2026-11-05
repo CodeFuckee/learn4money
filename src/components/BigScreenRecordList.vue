@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { useTimer } from "../composables/useTimer";
 import { fmtDurationCN } from "../lib/format";
 
-const { records, clearRecords } = useTimer();
+const { records, notice, clearRecords } = useTimer();
 const list = computed(() => records.value.slice(0, 100));
 
 function fmtClock(iso: string): string {
@@ -19,6 +19,7 @@ function onClear(): void {
 
 <template>
   <div class="bs-records">
+    <div v-if="notice" class="bs-notice">{{ notice }}</div>
     <div class="bs-records-head">
       <span>学习记录（{{ records.length }}）</span>
       <button class="bs-clear" :disabled="!records.length" @click="onClear">清空</button>

@@ -17,7 +17,7 @@
   - **Material**——由 **Vuetify 3**（Material Design 3 规范组件库）原生实现：深 `#141218` / 浅 `#fef7ff`，pill 按钮、elevation；
   - **Apple**——iOS 分组样式：深纯黑 / 浅 `#f2f2f7`，systemGreen、胶囊按钮；
   - **Fluent**——Windows 11：深 `#202020` / 浅 `#f3f3f3`，1px subtle stroke、4px 控件圆角、Segoe UI、accent 蓝。
-- 不足 5 秒的会话视为误触，不入记录。
+- 不足 1 秒的会话视为瞬时双击，不入记录（会给出「未计入」提示）。
 
 ## 运行
 

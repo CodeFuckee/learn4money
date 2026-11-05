@@ -5,7 +5,7 @@ import { CvButton, CvList, CvListItem, CvModal } from "@carbon/vue";
 import { useTimer } from "../../composables/useTimer";
 import { fmtDurationCN, fmtRecordDate } from "../../lib/format";
 
-const { records, clearRecords } = useTimer();
+const { records, notice, clearRecords } = useTimer();
 
 const confirmOpen = ref(false);
 
@@ -28,6 +28,7 @@ function doClear(): void {
         <Trash2 class="ic ic-xs" />清空
       </CvButton>
     </div>
+    <div v-if="notice" class="bs-notice">{{ notice }}</div>
     <CvList id="recordList" class="record-list">
       <CvListItem v-for="r in records.slice(0, 50)" :key="r.id" class="record-item">
         <span class="record-detail">

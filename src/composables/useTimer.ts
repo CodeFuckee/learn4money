@@ -16,14 +16,23 @@ const KEYS = {
   records: "l4m.records",
 } as const;
 
-/** 少于 5 秒视为误触，不入记录 */
-const MIN_RECORD_SECONDS = 5;
+/** 少于 1 秒视为瞬时双击，不入记录 */
+const MIN_RECORD_SECONDS = 1;
 
 const settings = reactive<Settings>(
   loadJSON<Settings>(KEYS.settings, { mode: "monthly", monthly: 20000, hourly: 50 }),
 );
 const session = ref<Session | null>(loadJSON<Session | null>(KEYS.session, null));
 const records = ref<StudyRecord[]>(loadJSON<StudyRecord[]>(KEYS.records, []));
+
+/** 临时提示（如「本次学习不足 1 秒，未计入记录」），3 秒后自动消失 */
+const notice = ref("");
+let noticeTimer: ReturnType<typeof setTimeout> | undefined;
+function setNotice(text: string): void {
+  notice.value = text;
+  if (noticeTimer) clearTimeout(noticeTimer);
+  noticeTimer = setTimeout(() => (notice.value = ""), 3000);
+}
 
 /** 每帧心跳：仅在计时中驱动响应式更新 */
 const now = ref(Date.now());
@@ -121,6 +130,8 @@ function stop(): void {
       earned: earnedValue,
     });
     saveJSON(KEYS.records, records.value);
+  } else {
+    setNotice("本次学习不足 1 秒，未计入记录");
   }
 }
 
@@ -141,6 +152,7 @@ export function useTimer() {
     settings,
     session,
     records,
+    notice,
     hourlyWage,
     perSecond,
     elapsedSeconds,

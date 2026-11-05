@@ -4,7 +4,7 @@ import { ClipboardList, Rocket, Trash2 } from "lucide-vue-next";
 import { useTimer } from "../composables/useTimer";
 import { fmtDurationCN, fmtRecordDate } from "../lib/format";
 
-const { records, clearRecords } = useTimer();
+const { records, notice, clearRecords } = useTimer();
 
 const confirmOpen = ref(false);
 
@@ -47,6 +47,7 @@ function doClear(): void {
         </template>
       </v-list-item>
     </v-list>
+    <div v-if="notice" class="bs-notice">{{ notice }}</div>
     <div class="empty-hint" id="emptyHint" v-show="records.length === 0">
       <Rocket class="ic ic-sm" />还没有记录，点击「开始学习」赚第一笔吧
     </div>
