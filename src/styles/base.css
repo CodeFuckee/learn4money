@@ -254,6 +254,8 @@ body[data-theme^="classic"] .bx--btn:disabled {
 }
 .bs-center .main-card.running {
   animation: none;
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 .bs-center .carbon-card {
   border: none !important;
