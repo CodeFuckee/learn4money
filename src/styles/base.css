@@ -88,6 +88,7 @@ body {
 body[data-theme^="classic"] .bx--btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* Carbon 默认 space-between 会把图标/文字拉到两端 */
   gap: 7px;
 }
 
@@ -97,6 +98,23 @@ body[data-theme^="classic"] .bx--btn {
   background: transparent;
   padding: 0;
 }
+/* 主控制按钮：与 Vuetify 版对齐（等分、可收缩、上限宽），覆盖 Carbon 自带的 min-inline-size */
+body[data-theme^="classic"] .controls .bx--btn {
+  min-inline-size: 0;
+  flex: 1 1 0;
+  max-inline-size: 160px;
+  white-space: nowrap;
+  padding-inline: 8px;
+}
+/* 控制行按钮统一窄内边距，窄屏（≤480px）三按钮不换行不溢出 */
+.controls .v-btn {
+  padding-inline: 8px;
+  white-space: nowrap;
+}
+body[data-theme^="classic"] .mode-switch.carbon .bx--btn {
+  min-inline-size: 0;
+}
+
 /* Carbon 按钮默认较宽，切换器内紧凑化保持同行 */
 .theme-switch.carbon .bx--btn,
 #themeModeToggle.bx--btn {
@@ -147,6 +165,43 @@ body[data-theme^="classic"] .bx--btn:disabled {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* 内容网格：窄屏单列，桌面双栏 dashboard（主看板左、设置/统计/记录右） */
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.col-main,
+.col-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+@media (min-width: 960px) {
+  .page {
+    max-width: 1200px;
+  }
+  .content-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+  .col-main {
+    position: sticky;
+    top: 24px;
+  }
+  .earned-amount {
+    font-size: 64px;
+  }
+  .elapsed-time {
+    font-size: 36px;
+  }
 }
 
 .page-header {

@@ -22,10 +22,16 @@ const isClassic = computed(() => themeLang.value === "classic");
       <div class="page">
         <PageHeader />
         <ThemeSwitcher />
-        <WageSettings />
-        <TimerCard />
-        <StatsRow />
-        <RecordList />
+        <div class="content-grid">
+          <div class="col-main">
+            <TimerCard />
+          </div>
+          <div class="col-side">
+            <WageSettings />
+            <StatsRow />
+            <RecordList />
+          </div>
+        </div>
         <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
       </div>
     </v-main>

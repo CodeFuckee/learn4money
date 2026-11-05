@@ -12,10 +12,16 @@ import CarbonRecordList from "./CarbonRecordList.vue";
   <div class="page">
     <PageHeader />
     <CarbonThemeSwitcher />
-    <CarbonWageSettings />
-    <CarbonTimerCard />
-    <CarbonStatsRow />
-    <CarbonRecordList />
+    <div class="content-grid">
+      <div class="col-main">
+        <CarbonTimerCard />
+      </div>
+      <div class="col-side">
+        <CarbonWageSettings />
+        <CarbonStatsRow />
+        <CarbonRecordList />
+      </div>
+    </div>
     <footer class="page-footer">数据保存在本机浏览器（localStorage），刷新不丢失</footer>
   </div>
 </template>
