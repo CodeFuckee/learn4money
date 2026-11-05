@@ -134,15 +134,6 @@ body[data-theme^="classic"] .bx--btn:disabled {
   color: var(--text-dim);
 }
 
-/* CvModal footer：插槽自定义按钮与 Carbon 内置 footer 布局对齐
- * （Carbon footer 按钮自带负 margin 叠加，插槽按钮需归零防溢出） */
-.bx--modal .bx--modal-footer .bx--btn {
-  flex: 1;
-  max-width: none;
-  min-width: 0;
-  margin: 0;
-  justify-content: center;
-}
 
 /* 记录列表嵌在卡片内，透出卡片底色 */
 .record-list.v-list {
@@ -313,43 +304,81 @@ body[data-theme^="classic"] .bx--btn:disabled {
   margin: 0;
 }
 .bs-footer {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   padding-bottom: 4px;
 }
-.bs-recent {
+.bs-records {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 860px;
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.bs-records-head {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-}
-.bs-recent-item {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  background: var(--chip-bg);
-  border-radius: 10px;
-  padding: 6px 14px;
-  font-size: 12.5px;
-}
-.bs-recent-time {
+  font-size: 13px;
   color: var(--text-dim);
 }
-.bs-recent-dur {
+.bs-clear {
+  border: none;
+  background: transparent;
+  color: var(--danger);
+  font-size: 12px;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+.bs-clear:hover {
+  background: var(--danger-bg);
+}
+.bs-clear:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.bs-record-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bs-record-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  background: var(--chip-bg);
+  border-radius: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+.bs-record-time {
+  color: var(--text-dim);
+}
+.bs-record-dur {
+  flex: 1;
   color: var(--text);
 }
-.bs-recent-earned {
+.bs-record-earned {
   color: var(--accent);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
-.bs-recent-hint {
-  font-size: 11px;
+.bs-record-empty {
+  text-align: center;
   color: var(--text-dim);
-  opacity: 0.75;
+  font-size: 13px;
+  padding: 24px 0;
 }
 .bs-dialog-body {
   display: flex;

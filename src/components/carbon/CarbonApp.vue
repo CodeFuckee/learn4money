@@ -10,7 +10,7 @@ import CarbonThemeSwitcher from "./CarbonThemeSwitcher.vue";
 import CarbonWageSettings from "./CarbonWageSettings.vue";
 import CarbonTimerCard from "./CarbonTimerCard.vue";
 import CarbonStatsRow from "./CarbonStatsRow.vue";
-import BigScreenRecent from "../BigScreenRecent.vue";
+import BigScreenRecordList from "../BigScreenRecordList.vue";
 import CarbonRecordList from "./CarbonRecordList.vue";
 
 const { themeLang } = useTheme();
@@ -45,22 +45,21 @@ const settingsOpen = ref(false);
     </main>
     <footer class="bs-footer">
       <CarbonStatsRow />
-      <BigScreenRecent />
+      <BigScreenRecordList />
     </footer>
     <CvModal
       :visible="settingsOpen"
       close-aria-label="关闭设置"
       @modal-hidden="settingsOpen = false"
     >
-      <template #title>设置与记录</template>
+      <template #title>设置</template>
       <template #content>
         <div class="bs-dialog-body">
           <CarbonWageSettings />
-          <CarbonRecordList />
+          <div class="bs-dialog-close">
+            <CvButton kind="secondary" @click="settingsOpen = false">关闭</CvButton>
+          </div>
         </div>
-      </template>
-      <template #secondary-button>
-        <CvButton kind="secondary" @click="settingsOpen = false">关闭</CvButton>
       </template>
     </CvModal>
   </div>
